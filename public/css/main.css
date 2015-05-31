@@ -1,0 +1,21 @@
+/* Angular-UI: */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.feedList {
+	list-style: none;
+}
+.entries .panel-heading {
+	padding:0;
+}
+.unread {
+	font-weight: bold;
+}
+.entryTitle {
+	display: block;
+	padding: 10px 15px;
+}
+
+.entryDescription img {
+	max-width: 100%;
+	height: auto;
+}

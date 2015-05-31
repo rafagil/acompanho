@@ -1,0 +1,13 @@
+OK   Ao atualizar as entries, ordenar a busca por data e se a data da enty atual for mais antiga do que a que já está na base nem continua. (modificado para usar índice)
+NN Exibir a imagem do post e colocar o title correto na imagem do post
+OK Fazer o update_all só renderizar a resposta se todos os updates forem processados, para o update no cliente ficar correto
+OK Mostrar um estilo diferente para as entries já lidas
+OK Mostrar o contador de não lidas
+OK Mostrar a exclamação caso o feed tenha tido problema na atualização (limpar a variavel em todos os OKs e deixar ela marcada caso aconteça algum problema)
+OK Paginação
+OK Multi User com login pelo google (Oauth)
+   Internacionalização
+NN Limpar os descriptions quando mudar de feed (talvez, pra evitar que fique muito pesado) (a paginação já cuida disso)
+OK Ver porque está dando erro na atualização
+   Botão para editar (que permite ordenar(?) e excluir feeds)
+   Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
