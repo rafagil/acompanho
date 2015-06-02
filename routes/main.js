@@ -2,16 +2,16 @@ module.exports = function(app) {
 
 	var checkAuth = function(req, res, next) {
 		//Uncomment this to enable OAuth2
-		if (req.isAuthenticated()) {
+		/*if (req.isAuthenticated()) {
 			return next();
 		} else {
 			res.status('401').json('Não autorizado');
-		}
+		}*/
 		//fake login:
-		/*req.user = {
+		req.user = {
 			_id: '55689996182493d0243918fb',
 			login: 'rafagil'
-		}*/
+		}
 		return next();
 	};
 	

@@ -29,23 +29,23 @@ module.exports = function(app) {
 		var page = req.params['page'];
 		var itemsPerPage = req.params['itemsPerPage'];
 		
+		var promise = Entry.find({'feed': feedId})
+			.select("_id title link	unread starred pubDate image feed")
+			.sort({'pubDate':'desc'});
+		
 		if (!page || !itemsPerPage) {
-			Entry.find({'feed': feedId})
-				.select("_id title link	unread starred pubDate image feed")
-				.sort({'pubDate':'desc'}).exec().then(function(entries) {
-				
+			promise.exec().then(function(entries) {
 				res.json({
 					'entries': entries,
 					'total': entries.length
 				});
 			});
 		} else {
-			Entry.find({'feed': feedId})
-				.select("_id title link	unread starred pubDate image feed")
+			promise
 				.skip((page -1) * itemsPerPage)
 				.limit(itemsPerPage)
-				.sort({'pubDate':'desc'}).exec().then(function(entries) {
-				
+				.exec().then(function(entries) {
+
 				//Count all Entries
 				Entry.count({feed: feedId}, function(err, count) {
 					
