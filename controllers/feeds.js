@@ -31,6 +31,27 @@ module.exports = function(app) {
 		});
 	};
 	
+	cont.update = function(req, res) {
+		var feed = req.body;
+		Feed.update({'_id' : feed._id}, {
+			title : feed.title,
+			descripion : feed.descripion,
+			link : feed.link,
+			url : feed.url,
+		}).exec().then(function(feed) {
+			res.json(feed);
+		});
+	};
+	
+	cont.delete = function(req, res) {
+		var feed = req.body;
+		Entry.remove({'feed': feed._id}).exec().then(function() {
+			Feed.remove({'_id' : feed._id}).exec().then(function(){
+				res.json({});
+			});
+		});
+	};
+	
 	cont.unreadCount = function(req, res) {
 		var feedId = req.params['feedId'];
 		Entry.count({feed: feedId, unread: true}, function(err, count) {

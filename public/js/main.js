@@ -8,6 +8,11 @@ angular.module('Acompanho', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize
 	$routeProvider.when('/', {
 		templateUrl: 'partials/empty.html'
 	});
+	
+	$routeProvider.when('/detail/:feedId', {
+		templateUrl: 'partials/feed_detail.html',
+		controller: 'FeedDetailController'
+	});
 
 	$routeProvider.otherwise({redirectTo:'/'});
 });

@@ -1,0 +1,23 @@
+<h2>Detalhes de {{editFeed.title}}</h2>
+<form>
+	<fieldset>
+		<legend>Editar</legend>
+		<label for="title">Título</label>
+		<input type="text" class="form-control" value="{{editFeed.title}}" ng-model="editFeed.title" />
+
+		<label for="url">Descrição</label>
+		<input type="text" class="form-control" value="{{editFeed.descripion}}" ng-model="editFeed.descripion" />	
+
+		<label for="url">URL</label>
+		<input type="text" class="form-control" value="{{editFeed.url}}" ng-model="editFeed.url" />	
+
+		<label for="url">Link</label>
+		<input type="text" class="form-control" value="{{editFeed.link}}" ng-model="editFeed.link" />
+		
+		<hr />
+		<button class="btn btn-primary" ng-click="save()">Salvar</button>
+		<button class="btn btn-default" ng-click="cancel()">Cancelar</button>
+		<button class="btn btn-danger" ng-click="delete()">Excluir</button>
+	</fieldset>
+</form>
+

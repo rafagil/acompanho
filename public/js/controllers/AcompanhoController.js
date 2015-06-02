@@ -33,6 +33,7 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
 				feed.selected = false;
 			});
 			FeedService.currentFeed.selected = true;
+			$scope.currentFeed = FeedService.currentFeed;
 		}
 	});
 	

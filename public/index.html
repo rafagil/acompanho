@@ -19,10 +19,14 @@
 		<script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		
 		<script src="js/main.js"></script>
+		<script src="js/services/DialogService.js"></script>
 		<script src="js/services/FeedService.js"></script>
+		
 		<script src="js/controllers/AcompanhoController.js"></script>
 		<script src="js/controllers/FeedsController.js"></script>
 		<script src="js/controllers/NewFeedController.js"></script>
+		<script src="js/controllers/FeedDetailController.js"></script>
+		<script src="js/controllers/ConfirmDialogController.js"></script>
 		
 	</head>
 	<body ng-controller="AcompanhoController" class="container-fluid">
@@ -30,7 +34,8 @@
 			<div class="container-fluid">
 				<div class="navbar-header"><a class="navbar-brand" href="#">Acompanho</a></div>
 				<ul class="nav navbar-nav navbar-right">
-        			<li><a ng-click="updateAll()" href="javascript:void(0)">Atualizar</a></li>
+        			<li><a href="#/detail/{{currentFeed._id}}">Detalhes do Feed</a></li>
+					<li><a ng-click="updateAll()" href="javascript:void(0)">Atualizar</a></li>
 				</ul>
 			</div>
 		</nav>

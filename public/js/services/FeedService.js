@@ -51,6 +51,28 @@ angular.module('Acompanho').factory('FeedService', function($http) {
 			});
 		},
 		
+		updateFeed: function(feed, onSuccess, onError) {
+			var me = this;
+			$http.post('/feeds/update', feed).then(function(resp) {
+				if (resp.data.error) {
+					if (onError) onError(resp.data.error);
+				} else {
+					if (onSuccess) onSuccess(resp.data);
+				}
+			});
+		},
+		
+		deleteFeed: function(feed, onSuccess, onError) {
+			var me = this;
+			$http.post('/feeds/delete', feed).then(function(resp) {
+				if (resp.data.error) {
+					if (onError) onError(resp.data.error);
+				} else {
+					me.findFeeds();
+				}
+			});
+		},
+		
 		setCurrentFeed: function(feedId) {
 			this.currentFeed = this.getFeedById(feedId);
 		},

@@ -18,10 +18,12 @@ module.exports = function(app) {
 	var controllers = app.controllers;
 
 	//Feeds:
-	app.get('/feeds',checkAuth, controllers.feeds.list);
 	app.post('/feeds/add', checkAuth, controllers.feeds.add);
+	app.post('/feeds/update', checkAuth, controllers.feeds.update);
+	app.post('/feeds/delete', checkAuth, controllers.feeds.delete);
+	app.get('/feeds',checkAuth, controllers.feeds.list);
 	app.get('/feeds/unread_count/:feedId', checkAuth, controllers.feeds.unreadCount);
-	
+
 	//Entries:
 	app.get('/entries/find/:feedId', checkAuth, controllers.entries.find);
 	app.get('/entries/find/:feedId/:page/:itemsPerPage', checkAuth, controllers.entries.find);
