@@ -6,13 +6,16 @@ OK Mostrar o contador de não lidas
 OK Mostrar a exclamação caso o feed tenha tido problema na atualização (limpar a variavel em todos os OKs e deixar ela marcada caso aconteça algum problema)
 OK Paginação
 OK Multi User com login pelo google (Oauth)
-   Internacionalização
+   
 NN Limpar os descriptions quando mudar de feed (talvez, pra evitar que fique muito pesado) (a paginação já cuida disso)
 OK Ver porque está dando erro na atualização
 OK Botão para editar (que permite ordenar(?) e excluir feeds)
-   Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
    
-   Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)
 OK O form de edição e categorização aparecem no lugar das entries (usando a navegação pelo angular)
-   Adicionar categorias dos feeds
+   
 OK Ver porque as vezes não seta o currentFeed (manter a edição em tempo real no nome ao lado, mas fazer um backup caso o usuário cancele a operação)
+	Redirect para o login server-side e configurar no openshift
+	Internacionalização
+	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
+	Adicionar categorias dos feeds
+	Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)

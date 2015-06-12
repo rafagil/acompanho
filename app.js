@@ -22,8 +22,15 @@ app.use(session({secret: 'segredo da sessao', resave: true, saveUninitialized: t
 app.use(passport.initialize());
 app.use(passport.session());
 
+var dbURL = 'mongodb://192.168.56.102/acompanho'
+if (process.env.OPENSHIFT_MONGODB_DB_URL) {
+	dbURL = process.env.OPENSHIFT_MONGODB_DB_URL + 'acompanho';
+}
+var serverIp = process.env.OPENSHIFT_NODEJS_IP || 'localhost'
+var serverPort = process.env.OPENSHIFT_NODEJS_PORT || 3000
 
-require('./config/database')('mongodb://192.168.56.102/acompanho');
+
+require('./config/database')(dbURL);
 load('utils')
 	.then('models')
 	.then('controllers')
@@ -34,6 +41,6 @@ require('./config/passport')();
 
 var routes = require('./routes/main')(app);
 
-app.listen(3000, function() {
+app.listen(serverPort, serverIp, function() {
 	console.log('Running on port 3000');
 });
