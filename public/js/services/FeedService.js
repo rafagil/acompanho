@@ -87,9 +87,9 @@ angular.module('Acompanho').factory('FeedService', function($http) {
 						feed.failedUpdate = true;
 					} else {
 						feed.failedUpdate = false;
-						if (me.currentFeed && me.currentFeed._id == feed._id && me.feedsReady) {
+						/*if (me.currentFeed && me.currentFeed._id == feed._id && me.feedsReady) {
 							me.feedsReady();
-						}
+						}*/
 						me.updateCount(feed);
 					}
 				});

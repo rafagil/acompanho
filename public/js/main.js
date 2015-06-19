@@ -1,4 +1,4 @@
-angular.module('Acompanho', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize']).config(function($routeProvider) {
+angular.module('Acompanho', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize']).config(function($routeProvider, $httpProvider) {
 		
 	$routeProvider.when('/list/:feedId', {
 		templateUrl: 'partials/entries.html',
@@ -15,6 +15,8 @@ angular.module('Acompanho', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize
 	});
 
 	$routeProvider.otherwise({redirectTo:'/'});
+	
+	$httpProvider.interceptors.push('loginInterceptor');
 });
 
 angular.module('Acompanho').filter('limitWordWise', function() {
