@@ -2,7 +2,7 @@ module.exports = function(app) {
 
 	var checkAuth = function(req, res, next) {
 		//Uncomment this to enable OAuth2
-		/*
+		
 		if (req.isAuthenticated()) {
 			return next();
 		} else if (req.url === '/') { // The main page does not expects a json response.
@@ -10,14 +10,14 @@ module.exports = function(app) {
 		} else {
 			res.status('401').json('Não autorizado');
 		}
-		*/
+		
 		
 		//fake login (comment this to enable authentication - Development purpouses only):
-		req.user = {
+		/*req.user = {
 			_id: '55689996182493d0243918fb',
 			login: 'rafagil'
 		}
-		return next();
+		return next();*/
 	};
 	
 	var controllers = app.controllers;
