@@ -12,12 +12,13 @@ module.exports = function(app) {
 		}
 		*/
 		
-		//fake login (comment this to enable authentication - Development purpouses only):
+		//Fake login (uncomment this to disable authentication - Development purpouses only):
 		req.user = {
 			_id: '55689996182493d0243918fb',
 			login: 'rafagil'
 		}
 		return next();
+		//Fake login end
 	};
 	
 	var controllers = app.controllers;

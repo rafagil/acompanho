@@ -50,7 +50,8 @@
 				<div class="panel-body">
 					<ul class="feedList nav nav-pills nav-stacked" ng-show="feeds">
 						<li ng-repeat="feed in feeds" class="{{feed.selected? 'active' : ''}}">
-							<a class="feedLink" href="#/list/{{feed._id}}">{{feed.title}}&nbsp;
+							
+							<a class="feedLink" ng-click="changeFeed(feed)">{{feed.title}}&nbsp;
 								<span ng-show="feed.unreadCount > 0">({{feed.unreadCount}})&nbsp;</span>
 								<span class="glyphicon glyphicon-refresh" aria-hidden="true" ng-show="feed.updating"></span>
 								<span class="glyphicon glyphicon-warning-sign text-danger" aria-hidden="true" ng-show="feed.failedUpdate"></span></a>

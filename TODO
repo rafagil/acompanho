@@ -14,6 +14,7 @@ OK O form de edição e categorização aparecem no lugar das entries (usando a 
 OK Ver porque as vezes não seta o currentFeed (manter a edição em tempo real no nome ao lado, mas fazer um backup caso o usuário cancele a operação)
 OK	Redirect para o login server-side e configurar no openshift
 	Internacionalização
-	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
+OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
 	Adicionar categorias dos feeds
 	Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)
+	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)

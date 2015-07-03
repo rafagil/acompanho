@@ -1,11 +1,19 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, FeedService) {
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $location, FeedService) {
 	
 	var TIMEOUT = 1000;
 	
 	$scope.updateAll = function() {
 		FeedService.updateAll();
 	};
-	
+
+	$scope.changeFeed = function(feed) {
+		if (feed.selected && FeedService.feedsReady) {
+			FeedService.feedsReady();
+		} else {
+			$location.path('/list/' + feed._id);
+		}
+	};
+
 	$scope.addFeed = function() {
 
 		var modalInstance = $modal.open({
