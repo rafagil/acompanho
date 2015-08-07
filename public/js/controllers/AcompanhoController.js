@@ -1,17 +1,9 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $location, FeedService) {
-	
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $location, FeedService, UserService) {
+
 	var TIMEOUT = 1000;
-	
+
 	$scope.updateAll = function() {
 		FeedService.updateAll();
-	};
-
-	$scope.changeFeed = function(feed) {
-		if (feed.selected && FeedService.feedsReady) {
-			FeedService.feedsReady();
-		} else {
-			$location.path('/list/' + feed._id);
-		}
 	};
 
 	$scope.addFeed = function() {
@@ -21,11 +13,11 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
 			controller: 'NewFeedController',
 			animation: true
 		});
-		
+
 		modalInstance.rendered.then(function() {
 			document.querySelector('#url').focus();
 		});
-		
+
 		modalInstance.result.then(function(newUrl) {
 			FeedService.addFeed({
 				url: newUrl
@@ -44,11 +36,11 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
 			$scope.currentFeed = FeedService.currentFeed;
 		}
 	});
-	
+
 	$scope.$on('read', function() {
 		FeedService.currentFeed.unreadCount--;
 	});
-	
+
 	var init = function() {
 		FeedService.findFeeds(function() {
 			$scope.feeds = FeedService.feeds;
@@ -58,9 +50,14 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
 				FeedService.feedsReady();
 			}
 			FeedService.ready = true;
-			
+
 			setInterval($scope.updateAll, 3e5);
 		});
+
+		UserService.getUser().then(function(user) {
+			$scope.user = user;
+		});
+
 	};
 
 	init();

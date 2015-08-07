@@ -5,7 +5,7 @@ OK Mostrar um estilo diferente para as entries já lidas
 OK Mostrar o contador de não lidas
 OK Mostrar a exclamação caso o feed tenha tido problema na atualização (limpar a variavel em todos os OKs e deixar ela marcada caso aconteça algum problema)
 OK Paginação
-OK Multi User com login pelo google (Oauth) 
+OK Multi User com login pelo google (Oauth)
 NN Limpar os descriptions quando mudar de feed (talvez, pra evitar que fique muito pesado) (a paginação já cuida disso)
 OK Ver porque está dando erro na atualização
 OK Botão para editar (que permite ordenar(?) e excluir feeds)
@@ -18,3 +18,5 @@ OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds aut
 	Adicionar categorias dos feeds
 	Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
+	Restangular
+	Melhorar o ui-view (não deixar mais o currentFeed no service, e sim no controller pai)
