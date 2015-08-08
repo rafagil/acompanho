@@ -2,6 +2,7 @@ angular.module('Acompanho', [
   'ngAnimate',
   'ui.bootstrap',
   'ngSanitize',
+  'ngTouch',
   'ui.router'
 ]).config(function($locationProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
 

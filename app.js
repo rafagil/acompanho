@@ -26,7 +26,7 @@ var dbURL = 'mongodb://192.168.56.102/acompanho'
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
 	dbURL = process.env.OPENSHIFT_MONGODB_DB_URL + 'acompanho';
 }
-var serverIp = process.env.OPENSHIFT_NODEJS_IP || 'localhost'
+var serverIp = process.env.OPENSHIFT_NODEJS_IP || '192.168.1.43'
 var serverPort = process.env.OPENSHIFT_NODEJS_PORT || 3000
 
 
