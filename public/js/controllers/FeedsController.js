@@ -1,4 +1,4 @@
-angular.module('Acompanho').controller('FeedsController', function($scope, $routeParams, $sce, FeedService) {
+angular.module('Acompanho').controller('FeedsController', function($scope, $stateParams, $sce, FeedService) {
 
 	$scope.itemsPerPage = 20;
 
@@ -15,7 +15,7 @@ angular.module('Acompanho').controller('FeedsController', function($scope, $rout
 
 	$scope.pageChanged = function() {
 
-		FeedService.findEntries($routeParams.feedId, $scope.currentPage, $scope.itemsPerPage, function(data) {
+		FeedService.findEntries($stateParams.feedId, $scope.currentPage, $scope.itemsPerPage, function(data) {
 			$scope.entries = data.entries;
 			$scope.entries.forEach(function(entry) {
 				$sce.trustAsHtml(entry.description);
@@ -28,7 +28,7 @@ angular.module('Acompanho').controller('FeedsController', function($scope, $rout
 	var processRequest = function() {
 		//Here we have to find the feed in database and put it on the return object;
 		//This object will be useful to mark wich one is currently selected
-		FeedService.setCurrentFeed($routeParams.feedId);
+		FeedService.setCurrentFeed($stateParams.feedId);
 
 		//Fires the event to update AcompanhoController:
 		$scope.$emit('feedSelected');
@@ -38,7 +38,7 @@ angular.module('Acompanho').controller('FeedsController', function($scope, $rout
 	};
 
 	//Created this to prevent errors on the first request:
-	//Only do the controller stuff if the first request is completed 
+	//Only do the controller stuff if the first request is completed
 	//Maybe there is a better way to do this
 	if (FeedService.ready) {
 		processRequest();

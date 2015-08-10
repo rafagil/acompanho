@@ -1,38 +1,31 @@
-angular.module('Acompanho', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngSanitize']).config(function($routeProvider, $httpProvider) {
-		
-	$routeProvider.when('/list/:feedId', {
-		templateUrl: 'partials/entries.html',
-		controller: 'FeedsController'
-	});
+angular.module('Acompanho', [
+  'ngAnimate',
+  'ui.bootstrap',
+  'ngSanitize',
+  'ngTouch',
+  'ui.router'
+]).config(function($locationProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
 
-	$routeProvider.when('/', {
-		templateUrl: 'partials/empty.html'
-	});
-	
-	$routeProvider.when('/detail/:feedId', {
-		templateUrl: 'partials/feed_detail.html',
-		controller: 'FeedDetailController'
-	});
+	'use strict';
 
-	$routeProvider.otherwise({redirectTo:'/'});
-	
-	$httpProvider.interceptors.push('loginInterceptor');
-});
+  $stateProvider
+    .state('feeds', {
+      url: '/',
+      templateUrl: 'partials/feeds.html',
+      controller: 'AcompanhoController'
+    })
+    .state('feeds.list', {
+      url: 'list/:feedId',
+      templateUrl: 'partials/entries.html',
+      controller: 'FeedsController'
+    }).
+  state('feeds.detail', {
+    url: 'detail/:feedId',
+    templateUrl: 'partials/feed_detail.html',
+    controller: 'FeedDetailController'
+  });
 
-angular.module('Acompanho').filter('limitWordWise', function() {
-	return function (value, max) {
-            if (!value) return '';
+	$urlRouterProvider.otherwise('/');
 
-            max = parseInt(max, 10);
-            if (!max) return value;
-            if (value.length <= max) return value;
-
-            value = value.substr(0, max);
-			var lastspace = value.lastIndexOf(' ');
-			if (lastspace != -1) {
-				value = value.substr(0, lastspace);
-			}
-
-            return value + '…';
-        };
+  $httpProvider.interceptors.push('loginInterceptor');
 });
