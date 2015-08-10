@@ -18,3 +18,4 @@ OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds aut
 	Adicionar categorias dos feeds
 	Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
+    Utilizar o Restangular e transformar tudo em REST
