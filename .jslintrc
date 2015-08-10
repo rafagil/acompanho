@@ -21,7 +21,8 @@
   "predef": [
     "angular",
     "$",
-    "_"
+    "_",
+    "alert"
   ],
   "regexp": false,
   "rhino": false,

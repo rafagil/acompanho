@@ -1,10 +1,10 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, FeedService, UserService) {
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, FeedService, UserService) {
   'use strict';
 
   var TIMEOUT = 3e5;
-	$scope.acompanho = {
-		currentFeed : null
-	};
+  $scope.acompanho = {
+    currentFeed: null
+  };
 
   $scope.updateAll = function() {
     FeedService.updateAll();
@@ -31,25 +31,32 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
     });
   };
 
-	$scope.selectFeed = function(feed) {
-		if ($scope.feeds) {
-			$scope.feeds.forEach(function(item) {
-				item.selected = false;
-				if (feed._id === item._id) {
-					item.selected = true;
-				}
-			});
-		}
-	}
+  $scope.selectFeed = function(feed) {
+    feed.selected = true;
+    if ($scope.feeds) {
+      $scope.feeds.forEach(function(item) {
+        if (feed._id !== item._id) {
+          item.selected = false;
+        }
+      });
+    }
+  };
+
+  $scope.showEntries = function(feed) {
+    $scope.selectFeed(feed);
+    $state.go('feeds.entries', {
+      id: feed._id
+    });
+  };
 
   var init = function() {
     FeedService.findFeeds(function() {
       $scope.feeds = FeedService.feeds;
       $rootScope.hideSplash = true;
-			//In case of currentFeed loading faster than the feed list;
-			if ($scope.acompanho.currentFeed) {
-				$scope.selectFeed($scope.acompanho.currentFeed);
-			}
+      //In case of currentFeed loading faster than the feed list;
+      if ($scope.acompanho.currentFeed) {
+        $scope.selectFeed($scope.acompanho.currentFeed);
+      }
       setInterval($scope.updateAll, TIMEOUT);
     });
 

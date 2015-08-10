@@ -13,13 +13,15 @@ OK O form de edição e categorização aparecem no lugar das entries (usando a 
 
 OK Ver porque as vezes não seta o currentFeed (manter a edição em tempo real no nome ao lado, mas fazer um backup caso o usuário cancele a operação)
 OK	Redirect para o login server-side e configurar no openshift
-	Internacionalização
-OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
-	Adicionar categorias dos feeds
-	Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)
-	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
-    Utilizar o Restangular e transformar tudo em REST
 OK Melhorar o ui-view (não deixar mais o currentFeed no service, e sim no controller pai)
 OK Mudar o detalhes para não fazer outro request completo, mudar apenas a view. (no save também)
+OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
+	
+	Internacionalização
+	Adicionar categorias dos feeds
+	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
+    Utilizar o Restangular e transformar tudo em REST
 	Renomear o FeedsController para EntriesController.
-	Remover os callbacks e usar promises
+	Remover os callbacks e usar promises no FeedService
+	Clicar no feed já selecionado não está atualizando as entries
+	Implementar uma forma genérica para resolver problemas de erro 404 e 500
