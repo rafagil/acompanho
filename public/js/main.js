@@ -4,9 +4,9 @@ angular.module('Acompanho', [
   'ngSanitize',
   'ngTouch',
   'ui.router'
-]).config(function($locationProvider, $httpProvider, $stateProvider, $urlRouterProvider) {
+]).config(function($httpProvider, $stateProvider, $urlRouterProvider) {
 
-	'use strict';
+  'use strict';
 
   $stateProvider
     .state('feeds', {
@@ -14,18 +14,18 @@ angular.module('Acompanho', [
       templateUrl: 'partials/feeds.html',
       controller: 'AcompanhoController'
     })
-    .state('feeds.list', {
-      url: 'list/:feedId',
+    .state('feeds.detail', {
+      url: ':id',
+      templateUrl: 'partials/feed_detail.html',
+      controller: 'FeedDetailController'
+    })
+    .state('feeds.entries', {
+      url: ':id/entries',
       templateUrl: 'partials/entries.html',
       controller: 'FeedsController'
-    }).
-  state('feeds.detail', {
-    url: 'detail/:feedId',
-    templateUrl: 'partials/feed_detail.html',
-    controller: 'FeedDetailController'
-  });
+    });
 
-	$urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/');
 
   $httpProvider.interceptors.push('loginInterceptor');
 });

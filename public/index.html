@@ -4,13 +4,37 @@
 <head>
 	<title>Acompanho</title>
 	<base href="/" />
+	<style type="text/css">
+		.splash {
+			position: fixed;
+			top: 0 left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 9999;
+		}
+
+		.splash h2 {
+			font-size: 2.1em;
+			font-weight: 500;
+			margin: 0 auto;
+		}
+	</style>
+
 	<link type="image/x-icon" href="/img/favicon.png" rel="shortcut icon">
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap-theme.css" />
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
-	<!-- Scripts in header to prevent showing "{{}}" tags -->
+</head>
+
+<body>
+	<div class="splash bg-warning" ng-if="!hideSplash">
+		<h2>Carregando seus feeds...</h2>
+		<img src="img/ring.svg" />
+	</div>
+	<ui-view></ui-view>
+
 	<script src="vendor/jquery/dist/jquery.min.js"></script>
 
 	<script src="vendor/angular/angular.js"></script>
@@ -35,11 +59,6 @@
 	<script src="js/controllers/NewFeedController.js"></script>
 	<script src="js/controllers/FeedDetailController.js"></script>
 	<script src="js/controllers/ConfirmDialogController.js"></script>
-
-</head>
-
-<body>
-	<ui-view></ui-view>
 </body>
 
 </html>

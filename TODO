@@ -19,5 +19,7 @@ OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds aut
 	Botão direito para editar/excluir (Colocar os botões de editar e excluir acima das entries também)
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
     Utilizar o Restangular e transformar tudo em REST
-	Melhorar o ui-view (não deixar mais o currentFeed no service, e sim no controller pai)
-
+OK Melhorar o ui-view (não deixar mais o currentFeed no service, e sim no controller pai)
+OK Mudar o detalhes para não fazer outro request completo, mudar apenas a view. (no save também)
+	Renomear o FeedsController para EntriesController.
+	Remover os callbacks e usar promises
