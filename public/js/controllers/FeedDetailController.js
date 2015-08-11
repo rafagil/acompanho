@@ -1,8 +1,5 @@
-angular.module('Acompanho').controller('FeedDetailController', function($scope, $stateParams, $state, FeedService, DialogService) {
+angular.module('Acompanho').controller('FeedDetailController', function($scope, $stateParams, $state, FeedService, DialogService, CategoryService) {
   'use strict';
-  FeedService.getFeedById($stateParams.id).then(function(feed) {
-    $scope.editFeed = feed;
-  });
 
   $scope.save = function() {
     FeedService.updateFeed($scope.editFeed, function() {
@@ -36,4 +33,15 @@ angular.module('Acompanho').controller('FeedDetailController', function($scope, 
       });
     });
   };
+
+  var init = function() {
+    CategoryService.list().then(function(categories) {
+      $scope.categories = categories;
+    });
+    FeedService.getFeedById($stateParams.id).then(function(feed) {
+      $scope.editFeed = feed;
+    });
+  };
+
+  init();
 });

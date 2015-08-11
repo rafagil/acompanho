@@ -28,14 +28,20 @@ module.exports = function(app) {
   app.get('/login', controllers.main.login);
   app.get('/logout', controllers.main.logout);
 
+	//Categories:
+	app.get('/categories', checkAuth, controllers.categories.list);
+	app.get('/categories/:id', checkAuth, controllers.categories.find);
+	app.post('/categories', checkAuth, controllers.categories.add);
+	app.put('/categories/:id', checkAuth, controllers.categories.update);
+	app.delete('/categories/:id', checkAuth, controllers.categories.delete);
+
   //Feeds:
   app.get('/feeds', checkAuth, controllers.feeds.list);
-	app.post('/feeds', checkAuth, controllers.feeds.add);
 	app.get('/feeds/:id', checkAuth, controllers.feeds.find);
+	app.post('/feeds', checkAuth, controllers.feeds.add);
+	app.put('/feeds/:id', checkAuth, controllers.feeds.update);
 	app.delete('/feeds/:id', checkAuth, controllers.feeds.delete);
-
-	app.post('/feeds/update', checkAuth, controllers.feeds.update);
-  app.get('/feeds/unread_count/:feedId', checkAuth, controllers.feeds.unreadCount);
+  app.get('/feeds/:id/unread_count', checkAuth, controllers.feeds.unreadCount);
 
   //Entries:
   app.get('/entries/find/:feedId', checkAuth, controllers.entries.find);

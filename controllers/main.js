@@ -1,5 +1,6 @@
 module.exports = function(app) {
-	cont = {};
+	'use strict';
+	var cont = {};
 
 	cont.user = function(req, res) {
 		res.json(req.user);

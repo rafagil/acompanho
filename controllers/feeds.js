@@ -41,9 +41,10 @@ module.exports = function(app) {
 		var feed = req.body;
 		Feed.update({'_id' : feed._id}, {
 			title : feed.title,
-			descripion : feed.descripion,
+			description : feed.description,
 			link : feed.link,
 			url : feed.url,
+			category: feed.category
 		}).exec().then(function(feed) {
 			res.json(feed);
 		});
@@ -59,7 +60,7 @@ module.exports = function(app) {
 	};
 
 	cont.unreadCount = function(req, res) {
-		var feedId = req.params.feedId;
+		var feedId = req.params.id;
 		Entry.count({feed: feedId, unread: true}, function(err, count) {
 			res.json(count);
 		});

@@ -3,21 +3,25 @@
 	<fieldset>
 		<legend>Editar</legend>
 		<label for="title">Título</label>
-		<input type="text" class="form-control" value="{{editFeed.title}}" ng-model="editFeed.title" />
+		<input type="text" class="form-control" ng-model="editFeed.title" />
 
 		<label for="url">Descrição</label>
-		<input type="text" class="form-control" value="{{editFeed.descripion}}" ng-model="editFeed.descripion" />	
+		<input type="text" class="form-control" ng-model="editFeed.description" />
 
 		<label for="url">URL</label>
-		<input type="text" class="form-control" value="{{editFeed.url}}" ng-model="editFeed.url" />	
+		<input type="text" class="form-control" ng-model="editFeed.url" />
 
 		<label for="url">Link</label>
-		<input type="text" class="form-control" value="{{editFeed.link}}" ng-model="editFeed.link" />
-		
+		<input type="text" class="form-control" ng-model="editFeed.link" />
+
+		<label for="url">Categoria</label>
+		<select class="form-control" ng-model="editFeed.category" ng-options="cat._id as cat.name for cat in categories">
+			<option value="">Sem categoria</option>
+		</select>
+
 		<hr />
 		<button class="btn btn-primary" ng-click="save()">Salvar</button>
 		<button class="btn btn-default" ng-click="cancel()">Cancelar</button>
 		<button class="btn btn-danger" ng-click="delete()">Excluir</button>
 	</fieldset>
 </form>
-

@@ -16,9 +16,10 @@ OK	Redirect para o login server-side e configurar no openshift
 OK Melhorar o ui-view (não deixar mais o currentFeed no service, e sim no controller pai)
 OK Mudar o detalhes para não fazer outro request completo, mudar apenas a view. (no save também)
 OK	Evitar que a lista de entries sofra um "refresh" quando atualiza os feeds automagicamente
-	
+
 	Internacionalização
-	Adicionar categorias dos feeds
+OK Adicionar categorias dos feeds
+		Os feeds que não possuem categoria aparecem como "Sem categoria". Fazer o get de feeds trazer um json já categorizado (ou fazer busca por cat e depois por feeds sem cat)
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
     Utilizar o Restangular e transformar tudo em REST
 	Renomear o FeedsController para EntriesController.
