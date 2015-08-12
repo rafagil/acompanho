@@ -1,4 +1,4 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, FeedService, UserService, CategoryService) {
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, $urlRouter, FeedService, UserService, CategoryService) {
   'use strict';
 
   var TIMEOUT = 3e5;
@@ -33,7 +33,6 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
   };
 
   $scope.selectFeed = function(feed) {
-
     if ($scope.categories) {
       $scope.categories.forEach(function(cat) {
         cat.feeds.forEach(function(item) {
@@ -48,7 +47,6 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
   };
 
   $scope.showEntries = function(feed) {
-    $scope.selectFeed(feed);
     $state.go('feeds.entries', {
       id: feed._id
     });

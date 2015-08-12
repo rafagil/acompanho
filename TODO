@@ -20,9 +20,9 @@ OK Adicionar categorias dos feeds
 OK Os feeds que não possuem categoria aparecem como "Sem categoria". Fazer o get de feeds trazer um json já categorizado (ou fazer busca por cat e depois por feeds sem cat)
 OK Renomear o FeedsController para EntriesController.
 OK Implementar uma forma genérica para resolver problemas de erro 404 e 500
+OK Remover os callbacks e usar promises no FeedService
 
 	Internacionalização
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
   Utilizar o Restangular e transformar tudo em REST
-	Remover os callbacks e usar promises no FeedService
 	Clicar no feed já selecionado não está atualizando as entries

@@ -4,9 +4,13 @@ angular.module('Acompanho', [
   'ngSanitize',
   'ngTouch',
   'ui.router'
-]).config(function($httpProvider, $stateProvider, $urlRouterProvider) {
+]).config(function($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider) {
 
   'use strict';
+
+  var ua = window.navigator.userAgent;
+  var isIE = ua.indexOf("MSIE ") >= 0;
+  $locationProvider.html5Mode(!isIE);
 
   $stateProvider
     .state('feeds', {
@@ -15,12 +19,12 @@ angular.module('Acompanho', [
       controller: 'AcompanhoController'
     })
     .state('feeds.detail', {
-      url: ':id',
+      url: 'feeds/:id',
       templateUrl: 'partials/feed_detail.html',
       controller: 'FeedDetailController'
     })
     .state('feeds.entries', {
-      url: ':id/entries',
+      url: 'feeds/:id/entries',
       templateUrl: 'partials/entries.html',
       controller: 'EntriesController'
     });
