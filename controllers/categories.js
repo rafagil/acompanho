@@ -2,6 +2,7 @@ module.exports = function(app) {
   'use strict';
   var cont = {};
   var Category = app.models.Category;
+  var Feed = app.models.Feed;
 
   cont.list = function(req, res) {
     Category.find({
@@ -9,7 +10,27 @@ module.exports = function(app) {
     }).sort({
       'name': 'asc'
     }).exec().then(function(categories) {
-      res.json(categories);
+      if (req.query.feeds) {
+        var promise = null;
+        categories.forEach(function(cat) {
+          if (promise) {
+            promise.then(function() {
+              return Feed.find({user:req.user._id, category: cat._id}).sort({'title':'asc'}).exec().then(function(feeds) {
+                cat.feeds = feeds;
+              });
+            });
+          } else {
+            promise = Feed.find({user:req.user._id, category: cat._id}).sort({'title':'asc'}).exec().then(function(feeds) {
+              cat.feeds = feeds;
+            });
+          }
+        });
+        promise.then(function() {
+          res.json(categories);
+        });
+      } else {
+        res.json(categories);
+      }
     });
   };
 
@@ -23,6 +44,7 @@ module.exports = function(app) {
   };
 
   cont.add = function(req, res) {
+    console.log(req.body);
     var newCat = req.body;
     newCat.user = req.user._id;
     if (newCat.name) {

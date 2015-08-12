@@ -5,6 +5,7 @@ module.exports = function() {
 	var schema = mongoose.Schema({
 		name       : {type : String},
 		description : {type : String},
+    feeds: {type: Array},
 		user: {type: ObjectId, ref: 'User'}
 	});
 
