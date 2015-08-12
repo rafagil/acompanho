@@ -8,9 +8,9 @@ module.exports = function(app) {
     /*if (req.isAuthenticated()) {
     	req.user = req.session.user;
     	return next();
-    } else {
-    	res.status('401').json('Não autorizado');
-    }*/
+    }
+    res.status('401').json('Não autorizado');
+    */
 
     //Fake login (uncomment this to disable authentication - Development purpouses only):
     req.user = {

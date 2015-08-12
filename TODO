@@ -10,7 +10,6 @@ NN Limpar os descriptions quando mudar de feed (talvez, pra evitar que fique mui
 OK Ver porque está dando erro na atualização
 OK Botão para editar (que permite ordenar(?) e excluir feeds)
 OK O form de edição e categorização aparecem no lugar das entries (usando a navegação pelo angular)
-
 OK Ver porque as vezes não seta o currentFeed (manter a edição em tempo real no nome ao lado, mas fazer um backup caso o usuário cancele a operação)
 OK	Redirect para o login server-side e configurar no openshift
 OK Melhorar o ui-view (não deixar mais o currentFeed no service, e sim no controller pai)
@@ -21,6 +20,7 @@ OK Os feeds que não possuem categoria aparecem como "Sem categoria". Fazer o ge
 OK Renomear o FeedsController para EntriesController.
 OK Implementar uma forma genérica para resolver problemas de erro 404 e 500
 OK Remover os callbacks e usar promises no FeedService
+OK Colocar um loading nas entries
 
 	Internacionalização
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
