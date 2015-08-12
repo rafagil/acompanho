@@ -4,6 +4,10 @@
 <div class="modal-body">
 	<label for"url">URL:</label>
 	<input id="url" type="text" ng-model="newUrl" class="form-control">
+	<label for="url">Categoria</label>
+	<select class="form-control" ng-model="category" ng-options="cat._id as cat.name for cat in categories">
+		<option value="">Sem categoria</option>
+	</select>
 </div>
 <div class="modal-footer">
 	<button class="btn btn-primary" ng-click="ok()">OK</button>

@@ -7,7 +7,7 @@ module.exports = function(app) {
 
 	var handleError = function(res, e) {
 		if (!res.headersSent) {
-			res.json({error: e});
+			res.status('500').json({error: e});
 		} else {
 			console.log('Something is calling this twice!');
 		}
@@ -26,9 +26,10 @@ module.exports = function(app) {
 	};
 
 	cont.add = function(req, res) {
-		var newFeed = req.body;
-		FeedUtil.parseFeedMeta(newFeed.url, function(newFeed) {
+		var feedParam = req.body;
+		FeedUtil.parseFeedMeta(feedParam.url, function(newFeed) {
 			newFeed.user = req.user._id;
+			newFeed.category = feedParam.category;
 			Feed.create(newFeed).then(function() {
 				res.json({});
 			});
@@ -62,7 +63,11 @@ module.exports = function(app) {
 	cont.unreadCount = function(req, res) {
 		var feedId = req.params.id;
 		Entry.count({feed: feedId, unread: true}, function(err, count) {
-			res.json(count);
+			if (err) {
+				handleError(err);
+			} else {
+				res.json(count);
+			}
 		});
 	};
 

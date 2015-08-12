@@ -1,11 +1,11 @@
-angular.module('Acompanho').controller('FeedsController', function($scope, $stateParams, $sce, FeedService) {
+angular.module('Acompanho').controller('EntriesController', function($scope, $stateParams, $sce, FeedService) {
   'use strict';
   $scope.itemsPerPage = 20;
 
   $scope.toggleEntry = function(entry) {
     if (!entry.description) {
       entry.description = "Loading...";
-      FeedService.readEntry(entry, function(data) {
+      FeedService.readEntry(entry).then(function(data) {
         entry.description = data;
         entry.unread = false;
         $scope.acompanho.currentFeed.unreadCount--;
@@ -15,7 +15,7 @@ angular.module('Acompanho').controller('FeedsController', function($scope, $stat
 
   $scope.pageChanged = function() {
 
-    FeedService.findEntries($stateParams.id, $scope.currentPage, $scope.itemsPerPage, function(data) {
+    FeedService.findEntries($stateParams.id, $scope.currentPage, $scope.itemsPerPage).then(function(data) {
       $scope.entries = data.entries;
       $scope.entries.forEach(function(entry) {
         $sce.trustAsHtml(entry.description);
@@ -27,7 +27,6 @@ angular.module('Acompanho').controller('FeedsController', function($scope, $stat
 
   var processRequest = function() {
     FeedService.getFeedById($stateParams.id).then(function(feed) {
-      $scope.acompanho.currentFeed = feed;
       $scope.selectFeed(feed);
     });
 

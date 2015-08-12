@@ -22,10 +22,10 @@ angular.module('Acompanho', [
     .state('feeds.entries', {
       url: ':id/entries',
       templateUrl: 'partials/entries.html',
-      controller: 'FeedsController'
+      controller: 'EntriesController'
     });
 
   $urlRouterProvider.otherwise('/');
 
-  $httpProvider.interceptors.push('loginInterceptor');
+  $httpProvider.interceptors.push('ResponseStatusInterceptorService');
 });

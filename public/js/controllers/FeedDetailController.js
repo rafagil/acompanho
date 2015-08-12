@@ -2,12 +2,11 @@ angular.module('Acompanho').controller('FeedDetailController', function($scope, 
   'use strict';
 
   $scope.save = function() {
-    FeedService.updateFeed($scope.editFeed, function() {
+    FeedService.updateFeed($scope.editFeed).then(function() {
       $state.go('feeds.entries', {
         id: $scope.editFeed._id
       });
-    }, function(e) {
-      alert(e);
+      $scope.updateFeedList();
     });
   };
 
@@ -23,13 +22,8 @@ angular.module('Acompanho').controller('FeedDetailController', function($scope, 
     DialogService.showConfirmDialog(message, function() {
       FeedService.deleteFeed($scope.editFeed).then(function() {
         $scope.acompanho.currentFeed = null;
-				for (i = 0; i < $scope.feeds.length; i++) {
-					if ($scope.feeds[i]._id === $scope.editFeed._id) {
-						$scope.feeds.splice(i, 1);
-						break;
-					}
-				}
 				$state.go('feeds');
+        $scope.updateFeedList();
       });
     });
   };

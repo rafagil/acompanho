@@ -8,5 +8,11 @@ angular.module('Acompanho').factory('CategoryService', function($http) {
     });
   };
 
+  service.listWithFeeds = function() {
+    return $http.get('/categories?feeds=true').then(function(response) {
+      return response.data;
+    });
+  };
+
   return service;
 });

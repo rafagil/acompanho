@@ -1,4 +1,4 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, FeedService, UserService) {
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, FeedService, UserService, CategoryService) {
   'use strict';
 
   var TIMEOUT = 3e5;
@@ -7,7 +7,7 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
   };
 
   $scope.updateAll = function() {
-    FeedService.updateAll();
+    FeedService.updateAll($scope.categories);
   };
 
   $scope.addFeed = function() {
@@ -22,22 +22,27 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
       document.querySelector('#url').focus();
     });
 
-    modalInstance.result.then(function(newUrl) {
+    modalInstance.result.then(function(dialogScope) {
       FeedService.addFeed({
-        url: newUrl
-      }, function() {
-        alert("Erro ao adicionar o feed.\nVerifique se a URL está correta.");
+        url: dialogScope.newUrl,
+        category: dialogScope.category
+      }).then(function() {
+        $scope.updateFeedList();
       });
     });
   };
 
   $scope.selectFeed = function(feed) {
-    feed.selected = true;
-    if ($scope.feeds) {
-      $scope.feeds.forEach(function(item) {
-        if (feed._id !== item._id) {
+
+    if ($scope.categories) {
+      $scope.categories.forEach(function(cat) {
+        cat.feeds.forEach(function(item) {
           item.selected = false;
-        }
+          if (feed._id === item._id) {
+            $scope.acompanho.currentFeed = item;
+            item.selected = true;
+          }
+        });
       });
     }
   };
@@ -49,14 +54,23 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
     });
   };
 
+  $scope.updateFeedList = function() {
+    CategoryService.listWithFeeds().then(function(categories) {
+      $scope.categories = categories;
+      $scope.updateAll();
+    });
+  };
+
   var init = function() {
-    FeedService.findFeeds(function() {
-      $scope.feeds = FeedService.feeds;
+    CategoryService.listWithFeeds().then(function(categories) {
+      $scope.categories = categories;
+
       $rootScope.hideSplash = true;
       //In case of currentFeed loading faster than the feed list;
       if ($scope.acompanho.currentFeed) {
         $scope.selectFeed($scope.acompanho.currentFeed);
       }
+      $scope.updateAll();
       setInterval($scope.updateAll, TIMEOUT);
     });
 
