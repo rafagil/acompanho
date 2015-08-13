@@ -1,9 +1,22 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, $urlRouter, FeedService, UserService, CategoryService) {
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, $q, FeedService, UserService, CategoryService) {
   'use strict';
 
   var TIMEOUT = 3e5;
   $scope.acompanho = {
     currentFeed: null
+  };
+
+  var getCategory = function(dialogScope) {
+    var deferrer = $q.defer();
+    if (dialogScope.newCategory) {
+      CategoryService.add(dialogScope.newCategory).then(function(cat) {
+        deferrer.resolve(cat._id);
+      });
+    } else {
+      deferrer.resolve(dialogScope.category);
+    }
+
+    return deferrer.promise;
   };
 
   $scope.updateAll = function() {
@@ -23,11 +36,13 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
     });
 
     modalInstance.result.then(function(dialogScope) {
-      FeedService.addFeed({
-        url: dialogScope.newUrl,
-        category: dialogScope.category
-      }).then(function() {
-        $scope.updateFeedList();
+      getCategory(dialogScope).then(function(category) {
+        FeedService.addFeed({
+          url: dialogScope.newUrl,
+          category: category
+        }).then(function() {
+          $scope.updateFeedList();
+        });
       });
     });
   };

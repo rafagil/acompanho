@@ -8,9 +8,9 @@ angular.module('Acompanho', [
 
   'use strict';
 
-  var ua = window.navigator.userAgent;
-  var isIE = ua.indexOf("MSIE ") >= 0;
-  $locationProvider.html5Mode(!isIE);
+  // var ua = window.navigator.userAgent;
+  // var isIE = ua.indexOf("MSIE ") >= 0;
+  $locationProvider.html5Mode(false); // HTML5 mode Not working properly:
 
   $stateProvider
     .state('feeds', {

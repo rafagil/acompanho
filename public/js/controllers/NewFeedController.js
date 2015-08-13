@@ -2,7 +2,11 @@ angular.module('Acompanho').controller('NewFeedController', function($scope, $mo
   'use strict';
 
   $scope.ok = function() {
-    $modalInstance.close({newUrl: $scope.newUrl, category: $scope.category});
+    $modalInstance.close({
+      newUrl: $scope.newUrl,
+      category: $scope.category,
+      newCategory: $scope.nova? $scope.newCategory : null
+    });
   };
 
   $scope.cancel = function() {

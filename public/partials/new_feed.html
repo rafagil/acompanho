@@ -2,12 +2,21 @@
 	<h3 class="modal-title">Novo Feed</h3>
 </div>
 <div class="modal-body">
-	<label for"url">URL:</label>
+	<label for "url">URL:</label>
 	<input id="url" type="text" ng-model="newUrl" class="form-control">
 	<label for="url">Categoria</label>
-	<select class="form-control" ng-model="category" ng-options="cat._id as cat.name for cat in categories">
-		<option value="">Sem categoria</option>
-	</select>
+	<br />
+	<button class="btn btn-default" type="button" btn-checkbox-true="true" btn-checkbox-false="false" ng-model="nova" btn-checkbox>Nova</button>
+	<div ng-show="nova">
+		<input type="text" class="form-control" ng-model="newCategory"  />
+	</div>
+
+	<div ng-hide="nova">
+		<select class="form-control" ng-model="category" ng-options="cat._id as cat.name for cat in categories" >
+			<option value="">Sem categoria</option>
+		</select>
+	</div>
+
 </div>
 <div class="modal-footer">
 	<button class="btn btn-primary" ng-click="ok()">OK</button>

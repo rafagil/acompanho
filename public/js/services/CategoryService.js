@@ -14,5 +14,11 @@ angular.module('Acompanho').factory('CategoryService', function($http) {
     });
   };
 
+  service.add = function(categoryName) {
+    return $http.post('/categories', {name: categoryName}).then(function(response) {
+      return response.data;
+    });
+  };
+
   return service;
 });

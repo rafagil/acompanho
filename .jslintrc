@@ -24,7 +24,7 @@
     "_",
     "alert"
   ],
-  "regexp": false,
+  "regexp": true,
   "rhino": false,
   "sloppy": false,
   "stupid": false,

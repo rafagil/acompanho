@@ -60,7 +60,6 @@ module.exports = function(app) {
   };
 
   cont.add = function(req, res) {
-    console.log(req.body);
     var newCat = req.body;
     newCat.user = req.user._id;
     if (newCat.name) {

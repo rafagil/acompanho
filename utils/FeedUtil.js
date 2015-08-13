@@ -1,60 +1,89 @@
-var FeedParser = require('feedparser');
-var request = require('request');
-
 module.exports = function() {
-	var FeedUtil = {};
+  'use strict';
 
-	var parseFeed = function(feedUrl, event, onReadable, onError) {
-		var feedParser = new FeedParser();
+  var FeedParser = require('feedparser');
+  var request = require('request');
+  var FeedUtil = {};
 
-		var req = request(feedUrl, function(error) {
-			if (error && onError)  onError(error);
-		});
+  var parseFeed = function(feedUrl, event, onReadable, onError) {
+    var feedParser = new FeedParser();
 
-		req.on('response', function(res) {
-			var stream = this;
+    var req = request(feedUrl, function(error) {
+      if (error && onError) {
+        onError(error);
+      }
+    });
 
-			if (res.statusCode != 200) {
-				return this.emit('error', new Error('Not OK'));
-			}
+    req.on('response', function(res) {
+      var stream = this;
 
-			stream.pipe(feedParser);
-		});
+      if (res.statusCode !== 200) {
+        return this.emit('error', new Error('Not OK'));
+      }
 
-		feedParser.on('error', function(e) {
-			if (onError) onError(e);
-		});
+      stream.pipe(feedParser);
+    });
 
-		feedParser.on(event, onReadable);
-		return feedParser;
-	};
+    feedParser.on('error', function(e) {
+      if (onError) {
+        onError(e);
+      }
+    });
 
-	FeedUtil.parseFeedMeta = function(feedUrl, onSuccess, onError) {
+    feedParser.on(event, onReadable);
+    return feedParser;
+  };
 
-		parseFeed(feedUrl, 'meta', function(meta) {
-			onSuccess({
-				url: feedUrl,
-				title: meta.title,
-				description: meta.description,
-				link:  meta.link,
-				failedUpdate: false
-			});
-		}, onError);
-	};
+  var parseImage = function(entry) {
+    if (!entry.image.url) {
 
-	FeedUtil.parseEntries = function(feedUrl, onSuccess, onError) {
-		var items = [];
-		var parser = parseFeed(feedUrl, 'readable', function(data) {
-			var stream = this;
-			while(item = stream.read()) {
-				items.push(item);
-			}
-		}, onError);
+      //try to find enclosures first:
+      if (entry.enclosures && entry.enclosures.length) {
+        entry.enclosures.forEach(function(enclosure) {
+          if (enclosure.type.indexOf('image') >= 0) {
+            entry.image.url = enclosure.url;
+          }
+        });
+      }
 
-		parser.on('end', function() {
-			onSuccess(items);
-		});
-	};
+      //if image is still not found, finds the first one in the post:
+      if (!entry.image.url) {
+        var firstImg = entry.description.match(/<img.+?src\s*=\s*(".+?"|'.+?')/);
+        if (firstImg) {
+          entry.image.url = firstImg[1].replace(/"|'/g, '');
+        }
+      }
+    }
+    return entry;
+  };
 
-	return FeedUtil;
+  FeedUtil.parseFeedMeta = function(feedUrl, onSuccess, onError) {
+
+    parseFeed(feedUrl, 'meta', function(meta) {
+      onSuccess({
+        url: feedUrl,
+        title: meta.title,
+        description: meta.description,
+        link: meta.link,
+        failedUpdate: false
+      });
+    }, onError);
+  };
+
+  FeedUtil.parseEntries = function(feedUrl, onSuccess, onError) {
+    var items = [];
+    var parser = parseFeed(feedUrl, 'readable', function() {
+      var stream = this;
+      var item;
+      while (item = stream.read()) {
+        items.push(parseImage(item));
+      }
+    }, onError);
+
+    parser.on('end', function() {
+      onSuccess(items);
+    });
+  };
+
+  return FeedUtil;
 };

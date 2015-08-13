@@ -2,10 +2,19 @@
 <accordion close-others="true">
 	<accordion-group ng-repeat="entry in entries" is-open="status.open">
 		<accordion-heading>
-			<span ng-click="toggleEntry(entry)" class="entryTitle {{entry.unread? 'unread' :''}}">
-				{{entry.title | limitWordWise:110}}
-				<span class="pull-right">{{entry.pubDate | date:'dd/MM/yyyy hh:mm'}}</span>
-			</span>
+			<div class="row">
+				<div class="col-sm-1 no-padding-right" ng-if="entry.image">
+					<img src="{{entry.image}}" style="width:100%" />
+				</div>
+				<div ng-class="{'col-sm-9 no-padding-left': entry.image, 'col-sm-10': !entry.image}">
+					<span ng-click="toggleEntry(entry)" class="entryTitle {{entry.unread? 'unread' :''}}">
+						{{entry.title | limitWordWise:110}}
+					</span>
+				</div>
+				<div class="col-sm-2 text-right">
+					<span>{{entry.pubDate | date:'dd/MM/yyyy hh:mm'}}</span>
+				</div>
+			</div>
 		</accordion-heading>
 		<h2><a href="{{entry.link}}" target="_blank">{{entry.title}}</a></h2>
 		<div ng-bind-html="entry.description" class="entryDescription"></div>

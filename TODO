@@ -22,7 +22,18 @@ OK Implementar uma forma genérica para resolver problemas de erro 404 e 500
 OK Remover os callbacks e usar promises no FeedService
 OK Colocar um loading nas entries
 
+backlog:
 	Internacionalização
 	Melhorar o processo de deploy (criar os js do ENV, inclusive para funcionar com o GitHub)
+
+Melhorias internas:
   Utilizar o Restangular e transformar tudo em REST
+
+Bugs:
 	Clicar no feed já selecionado não está atualizando as entries
+	O modo HTML 5 de URLs não está funcionando muito bem
+
+Novas funcionalidades e design:
+OK Pegar  a primeira imagem do feed (enclosure ou primeiro img) e mostrar a miniatura na listagem
+	Alterar o layout para mostrar um pouco do feed e ao clicar abre um sidepanel com o conteúdo do feed
+	Criar visualização com todos os feeds (infinite scroll?) com ícone do feed no topo de cada post

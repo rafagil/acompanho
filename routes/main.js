@@ -51,7 +51,6 @@ module.exports = function(app) {
 
   //All (Html 5 mode on angular)
   app.all('/*', function(req, res) {
-    console.log();
 		res.sendFile('index.html', {root: __dirname + '/../public/'});
   });
 
