@@ -1,8 +1,8 @@
 /* Angular-UI: */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-.feedList {
-	list-style: none;
+.feedList li{
+	cursor: pointer;
 }
 .entries .panel-heading {
 	padding:0;

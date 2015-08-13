@@ -19,20 +19,21 @@
       <h3 class="panel-title">Meus Feeds</h3>
     </div>
     <div class="panel-body">
-      <ul ng-show="categories">
-        <li ng-repeat="cat in categories" >
-          {{cat.name}}
-          <ul class="feedList nav nav-pills nav-stacked">
-            <li ng-repeat="feed in cat.feeds" ng-class="{active: feed.selected}" ng-click="showEntries(feed)">
-              <a class="feedLink">{{feed.title}}
-                <span ng-show="feed.unreadCount > 0" class="badge">{{feed.unreadCount}}</span>&nbsp;
-                <span class="glyphicon glyphicon-refresh" aria-hidden="true" ng-show="feed.updating"></span>
-                <span class="glyphicon glyphicon-warning-sign text-danger" aria-hidden="true" ng-show="feed.failedUpdate"></span></a>
-            </li>
-          </ul>
+      <div ng-repeat="cat in categories">
+        <label>{{cat.name}}</label>
+        <ul class="feedList list-group">
+          <li ng-repeat="feed in cat.feeds" class="list-group-item" ng-class="{active: feed.selected}" ng-click="showEntries(feed)">
+            {{feed.title}} &nbsp;
 
-        </li>
-      </ul>
+
+
+            <span ng-show="feed.unreadCount > 0" class="badge" ng-hide="feed.updating || feed.failedUpdate">{{feed.unreadCount}}</span>
+            <span class="badge" ng-show="feed.updating" ng-show="feed.failedUpdate"><i class="glyphicon glyphicon-refresh" aria-hidden="true"></i></span>
+
+            <span class="badge" ng-show="feed.failedUpdate" aria-hidden="true"><i class="glyphicon glyphicon-warning-sign text-danger"></i></span>
+          </li>
+        </ul>
+      </div>
       <div ng-hide="categories.length">Nenhum Feed aqui. Adicione um novo!</div>
       <hr />
       <button ng-click="addFeed()" class="btn btn-primary">Adicionar Feed</button>

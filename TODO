@@ -28,6 +28,7 @@ backlog:
 
 Melhorias internas:
   Utilizar o Restangular e transformar tudo em REST
+  Gravar a imagem do post redimensionada no banco (usar base64).
 
 Bugs:
 	Clicar no feed já selecionado não está atualizando as entries
