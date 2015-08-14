@@ -1,24 +1,41 @@
-angular.module('Acompanho').controller('EntriesController', function($scope, $stateParams, $sce, FeedService) {
+angular.module('Acompanho').controller('EntriesController', function($scope, $stateParams, $aside, $sce, FeedService) {
   'use strict';
   $scope.itemsPerPage = 20;
 
-  $scope.toggleEntry = function(entry) {
+  var showAside = function(entry) {
+    $aside.open({
+      placement: 'right',
+      controller: function($scope, $modalInstance) {
+        $scope.entry = entry;
+        $scope.close = function() {
+          $modalInstance.dismiss('cancel');
+        };
+      },
+      templateUrl: 'partials/entry.html',
+      size: 'lg'
+    });
+  };
+
+  $scope.openEntry = function(entry) {
     if (!entry.description) {
-      entry.description = "Loading...";
+      entry.loading = true;
       FeedService.readEntry(entry).then(function(data) {
+        entry.loading = false;
         entry.description = data;
         entry.unread = false;
         $scope.acompanho.currentFeed.unreadCount--;
       });
     }
+    showAside(entry);
   };
 
-  $scope.pageChanged = function() {
+  $scope.pageChanged = function(newPage) {
 
-    FeedService.findEntries($stateParams.id, $scope.currentPage, $scope.itemsPerPage).then(function(data) {
+    FeedService.findEntries($stateParams.id, newPage, $scope.itemsPerPage).then(function(data) {
       $scope.entries = data.entries;
       $scope.entries.forEach(function(entry) {
         $sce.trustAsHtml(entry.description);
+        $sce.trustAsHtml(entry.summary);
       });
 
       $scope.totalEntries = data.total;
@@ -30,8 +47,7 @@ angular.module('Acompanho').controller('EntriesController', function($scope, $st
       $scope.selectFeed(feed);
     });
 
-    $scope.currentPage = 1;
-    $scope.pageChanged();
+    $scope.pageChanged(1);
   };
 
   processRequest();

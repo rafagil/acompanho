@@ -58,6 +58,9 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
           }
         });
       });
+    } else {
+      $scope.feedSelectedBeforeCat = true;
+      $scope.acompanho.currentFeed = feed;
     }
   };
 
@@ -80,7 +83,7 @@ angular.module('Acompanho').controller('AcompanhoController', function($scope, $
 
       $rootScope.hideSplash = true;
       //In case of currentFeed loading faster than the feed list;
-      if ($scope.acompanho.currentFeed) {
+      if ($scope.feedSelectedBeforeCa) {
         $scope.selectFeed($scope.acompanho.currentFeed);
       }
       $scope.updateAll();

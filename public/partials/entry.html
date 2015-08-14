@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <i class="glyphicon glyphicon-remove pull-right" ng-click="close()" style="cursor:pointer"></i>
+    <h3 class="modal-title">{{entry.title}}</h3>
+</div>
+<div class="modal-body">
+  <img src="img/ring.svg" style="width:20px" ng-show="entry.loading" />
+  <div ng-bind-html="entry.description" class="entryDescription"></div>
+</div>
+<div class="modal-footer">
+    Share
+</div>

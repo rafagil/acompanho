@@ -50,7 +50,7 @@ module.exports = function(app) {
   app.get('/entries/read/:entryId', checkAuth, controllers.entries.read);
 
   //All (Html 5 mode on angular)
-  app.all('/*', function(req, res) {
+  app.get('/*', function(req, res) {
 		res.sendFile('index.html', {root: __dirname + '/../public/'});
   });
 

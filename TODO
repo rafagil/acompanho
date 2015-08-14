@@ -38,3 +38,17 @@ Novas funcionalidades e design:
 OK Pegar  a primeira imagem do feed (enclosure ou primeiro img) e mostrar a miniatura na listagem
 	Alterar o layout para mostrar um pouco do feed e ao clicar abre um sidepanel com o conteúdo do feed
 	Criar visualização com todos os feeds (infinite scroll?) com ícone do feed no topo de cada post
+	Melhorar o login:
+		Adicionar a estratégia local;
+		Ao autenticar o usuário, gerar um token para enviar para o cliente. Este token será salvo na sessão e no banco.
+		No cliente, salvar o token como permStorage (ou cookie permanente);
+		Configurar o Restangular para mandar esse token em todas as requisições.
+		Se a requisição vier sem token:
+			Verifica se está logado no passport.
+				Se sim: gera um novo token, atualiza o banco e a sessão e devolve o novo token para o client.
+				Se não: 403
+		Se a requisição vier com token:
+			Verifica se o token é válido na sessão.
+				Se sim: 200
+				Se não: verifica se o token é válido no banco.
+					Se sim: Ou retornar um status diferente de 200 para gerar um novo token, ou simplesmente adiciona o token dele na sessão

@@ -57,6 +57,17 @@ module.exports = function() {
     return entry;
   };
 
+  var parseSummary = function(entry) {
+    if (entry.summary) {
+      //removes images, links and all tags:
+      entry.summary = entry.summary
+        .replace(/<img.+?>/, '')
+        .replace(/<a.+?\/a>/, '')
+        .replace(/(<([^>]+)>)/ig,"");
+    }
+    return entry;
+  };
+
   FeedUtil.parseFeedMeta = function(feedUrl, onSuccess, onError) {
 
     parseFeed(feedUrl, 'meta', function(meta) {
@@ -76,7 +87,9 @@ module.exports = function() {
       var stream = this;
       var item;
       while (item = stream.read()) {
-        items.push(parseImage(item));
+        parseImage(item);
+        parseSummary(item);
+        items.push(item);
       }
     }, onError);
 

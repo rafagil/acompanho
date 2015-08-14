@@ -4,9 +4,7 @@
 .feedList li{
 	cursor: pointer;
 }
-.entries .panel-heading {
-	padding:0;
-}
+
 .unread {
 	font-weight: bold;
 }
