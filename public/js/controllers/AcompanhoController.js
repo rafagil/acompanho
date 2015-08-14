@@ -1,9 +1,24 @@
-angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, $q, FeedService, UserService, CategoryService) {
+angular.module('Acompanho').controller('AcompanhoController', function($scope, $modal, $rootScope, $state, $q, $aside, FeedService, UserService, CategoryService) {
   'use strict';
 
   var TIMEOUT = 3e5;
   $scope.acompanho = {
     currentFeed: null
+  };
+
+  $scope.showMenuAside = function() {
+    $aside.open({
+      placement: 'left',
+      scope: $scope,
+      controller: function($modalInstance) {
+        $scope.showEntriesAndDismiss = function(feed) {
+          $scope.showEntries(feed);
+          $modalInstance.dismiss('cancel');
+        };
+      },
+      templateUrl: 'partials/feeds_aside.html',
+      size: 'lg'
+    });
   };
 
   var getCategory = function(dialogScope) {
