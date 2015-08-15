@@ -1,6 +1,6 @@
 angular.module('Acompanho').controller('EntriesController', function($scope, $stateParams, $aside, $sce, FeedService) {
   'use strict';
-  $scope.itemsPerPage = 20;
+  $scope.pageSize = 20;
 
   var showAside = function(entry) {
     $aside.open({
@@ -19,9 +19,9 @@ angular.module('Acompanho').controller('EntriesController', function($scope, $st
   $scope.openEntry = function(entry) {
     if (!entry.description) {
       entry.loading = true;
-      FeedService.readEntry(entry).then(function(data) {
+      FeedService.readEntry(entry).then(function(description) {
         entry.loading = false;
-        entry.description = data;
+        entry.description = description;
         entry.unread = false;
         $scope.acompanho.currentFeed.unreadCount--;
       });
@@ -31,7 +31,7 @@ angular.module('Acompanho').controller('EntriesController', function($scope, $st
 
   $scope.pageChanged = function(newPage) {
 
-    FeedService.findEntries($stateParams.id, newPage, $scope.itemsPerPage).then(function(data) {
+    FeedService.findEntries($stateParams.id, newPage, $scope.pageSize).then(function(data) {
       $scope.entries = data.entries;
       $scope.entries.forEach(function(entry) {
         $sce.trustAsHtml(entry.description);

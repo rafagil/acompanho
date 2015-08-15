@@ -4,8 +4,9 @@ angular.module('Acompanho', [
   'ngSanitize',
   'ngTouch',
   'ngAside',
-  'ui.router'
-]).config(function($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider) {
+  'ui.router',
+  'restangular',
+]).config(function($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider, RestangularProvider) {
 
   'use strict';
 
@@ -33,4 +34,12 @@ angular.module('Acompanho', [
   $urlRouterProvider.otherwise('/');
 
   $httpProvider.interceptors.push('ResponseStatusInterceptorService');
+
+  RestangularProvider.setBaseUrl('/api');
+  RestangularProvider.setDefaultHeaders({
+    token: 'tokenHere'
+  });
+  RestangularProvider.setRestangularFields({
+    id: "_id"
+  });
 });

@@ -8,7 +8,7 @@ module.exports = function(app) {
 
 	var handleError = function(res, e, feed) {
 		if (!res.headersSent) {
-			res.status('500').json({error: e});
+			res.json({error: e});
 		} else {
 			console.log('Something is calling this twice!');
 		}
@@ -26,14 +26,14 @@ module.exports = function(app) {
 
 	cont.find = function(req, res) {
 		var feedId = req.params.feedId;
-		var page = req.params.page;
-		var itemsPerPage = req.params.itemsPerPage;
+		var page = req.query.page;
+		var pageSize = req.query.pageSize;
 
 		var promise = Entry.find({'feed': feedId})
 			.select("_id title link	unread starred pubDate image summary feed")
 			.sort({'pubDate':'desc'});
 
-		if (!page || !itemsPerPage) {
+		if (!page || !pageSize) {
 			promise.exec().then(function(entries) {
 				res.json({
 					'entries': entries,
@@ -42,15 +42,12 @@ module.exports = function(app) {
 			});
 		} else {
 			promise
-				.skip((page -1) * itemsPerPage)
-				.limit(itemsPerPage)
+				.skip((page -1) * pageSize)
+				.limit(pageSize)
 				.exec().then(function(entries) {
 
 				//Count all Entries
-				Entry.count({feed: feedId}, function(err, count) {
-					if (err) {
-						handleError(res, err);
-					}
+				Entry.count({feed: feedId}).exec().then(function(count) {
 					res.json({
 						'entries': entries,
 						'total': count

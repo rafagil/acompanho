@@ -35,7 +35,7 @@
           <ul class="feedList list-group">
             <li ng-repeat="feed in cat.feeds" class="list-group-item" ng-class="{active: feed.selected}" ng-click="showEntries(feed)">
               {{feed.title}} &nbsp;
-              <span ng-show="feed.unreadCount > 0 && !feed.updating && !feed.failedUpdate" class="badge" ng-hide="">{{feed.unreadCount}}</span>
+              <span ng-show="feed.unreadCount > 0 && !feed.updating && !feed.failedUpdate" class="badge">{{feed.unreadCount}}</span>
               <span class="badge" ng-show="feed.updating && !feed.failedUpdate"><i class="glyphicon glyphicon-refresh" aria-hidden="true"></i></span>
               <span class="badge" ng-show="feed.failedUpdate" aria-hidden="true"><i class="glyphicon glyphicon-warning-sign text-danger"></i></span>
             </li>

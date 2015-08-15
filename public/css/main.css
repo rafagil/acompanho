@@ -25,3 +25,7 @@
 .main {
 	padding-top: 60px
 }
+
+.pointer {
+	cursor: pointer;
+}

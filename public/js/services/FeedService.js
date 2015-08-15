@@ -1,50 +1,39 @@
-angular.module('Acompanho').factory('FeedService', function($http) {
+angular.module('Acompanho').factory('FeedService', function(Restangular) {
   'use strict';
 
   var service = {};
 
-  service.findEntries = function(feedId, currentPage, itemsPerPage) {
-    return $http.get('/entries/find/' + feedId + '/' + currentPage + '/' + itemsPerPage + '?d=' + Date.now()).then(function(resp) {
-      return resp.data;
-    });
+  service.findEntries = function(feedId, currentPage, pageSize) {
+    return Restangular.one('feeds', feedId).one('entries').get({page: currentPage, pageSize: pageSize});
   };
 
   service.getFeedById = function(id) {
-    return $http.get('/feeds/' + id + '?d=' + Date.now()).then(function(response) {
-      return response.data;
-    });
+    return Restangular.one('feeds', id).get();
   };
 
   service.addFeed = function(feed) {
-    return $http.post('/feeds', feed).then(function(resp) {
-      return resp.data;
-    });
+    return Restangular.all('feeds').post(feed);
   };
 
   service.updateFeed = function(feed) {
-    return $http.put('/feeds/' + feed._id, feed).then(function(resp) {
-      return resp.data;
-    });
+    return feed.put();
   };
 
   service.deleteFeed = function(feed) {
-    return $http.delete('/feeds/' + feed._id).then(function(resp) {
-      return resp.data;
-    });
+    return feed.remove();
   };
 
   service.updateAll = function(categories) {
-    var me = this;
     categories.forEach(function(cat) {
       cat.feeds.forEach(function(feed) {
         feed.updating = true;
-        $http.get('/entries/update/' + feed._id + '?d=' + Date.now()).then(function(resp) {
+        Restangular.one('feeds', feed._id).one('entries').one('update').get().then(function(resp) {
           feed.updating = false;
-          if (resp.data.error) {
+          if (resp.error) {
             feed.failedUpdate = true;
           } else {
             feed.failedUpdate = false;
-            me.updateCount(feed);
+            service.updateCount(feed);
           }
         });
       });
@@ -53,14 +42,14 @@ angular.module('Acompanho').factory('FeedService', function($http) {
   };
 
   service.readEntry = function(entry) {
-    return $http.get('/entries/read/' + entry._id).then(function(resp) {
-      return resp.data.description;
+    return Restangular.one('entries', entry._id).get().then(function(entry) {
+      return entry.description;
     });
   };
 
   service.updateCount = function(feed) {
-    $http.get('/feeds/' + feed._id + '/unread_count').then(function(resp) {
-      feed.unreadCount = resp.data;
+    Restangular.one('feeds', feed._id).one('unread_count').get().then(function(unreadCount) {
+      feed.unreadCount = unreadCount;
     });
   };
 

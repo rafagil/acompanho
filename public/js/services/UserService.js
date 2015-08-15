@@ -1,12 +1,10 @@
-angular.module('Acompanho').factory('UserService', function($http) {
+angular.module('Acompanho').factory('UserService', function(Restangular) {
   'use strict';
 
   var service = {};
 
   service.getUser = function() {
-    return $http.get('/user').then(function(response) {
-      return response.data;
-    });
+    return Restangular.one('user').get();
   };
 
   return service;
