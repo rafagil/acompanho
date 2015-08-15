@@ -1,13 +1,35 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Login</title>
-	</head>
-	<body>
-		<div class="container">
-			<a href="/auth/github">
-				<h1>Entre pelo GitHub</h1>
-			</a>
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/dist/css/bootstrap-theme.css" />
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/font-awesome.css" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+</head>
+
+<body>
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Bem-vindo ao Acompanho</h1>
+			<p>
+				Mantenha-se informado sobre tudo o que acontece na internet.<br/>
+				Acompanhe blogs, sites de notícia e muito mais.
+			</p>
+			<p>
+				<button class="btn btn-primary btn-lg" id="btnGithub">
+					<i class="fa fa-github"></i> Entre usando o GitHub
+				</button>
+			</p>
 		</div>
-	</body>
+	</div>
+	<script type="text/javascript">
+		document.querySelector('#btnGithub').addEventListener('click', function() {
+			window.location = '/auth/github';
+		})
+	</script>
+</body>
+
 </html>

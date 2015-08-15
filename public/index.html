@@ -11,6 +11,7 @@
 			width: 100%;
 			height: 100%;
 			z-index: 9999;
+			background-color: #fff;
 		}
 
 		.splash h2 {
@@ -30,9 +31,14 @@
 </head>
 
 <body>
-	<div class="splash bg-warning" ng-if="!hideSplash">
-		<h2>Carregando seus feeds...</h2>
-		<img src="img/ring.svg" />
+	<div class="splash" ng-if="!hideSplash">
+		<div class="container">
+			<div class="jumbotron text-center">
+				<h1>Bem-vindo ao Acompanho</h1>
+				<h3>Carregando seus feeds...</h3>
+				<p><img src="img/ring.svg" /></p>
+			</div>
+		</div>
 	</div>
 	<ui-view></ui-view>
 
