@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Acompanho</a>
+      <a class="navbar-brand" href="javascript:void(0)" ng-click="goHome()">Acompanho</a>
     </div>
     <nav class="hidden-xs">
       <ul class="nav navbar-nav navbar-right">
@@ -37,7 +37,7 @@
               {{feed.title}} &nbsp;
               <span ng-show="feed.unreadCount > 0 && !feed.updating && !feed.failedUpdate" class="badge">{{feed.unreadCount}}</span>
               <span class="badge" ng-show="feed.updating && !feed.failedUpdate"><i class="glyphicon glyphicon-refresh" aria-hidden="true"></i></span>
-              <span class="badge" ng-show="feed.failedUpdate" aria-hidden="true"><i class="glyphicon glyphicon-warning-sign text-danger"></i></span>
+              <span class="badge" ng-show="feed.failedUpdate" aria-hidden="true"><i class="glyphicon glyphicon-warning-sign"></i></span>
             </li>
           </ul>
         </div>
@@ -50,5 +50,11 @@
 
   <div class="entries col-md-10" ui-view ng-show="acompanho.currentFeed">
   </div>
-  <div ng-if="!acompanho.currentFeed">Selecione um feed para exibir as postagens.</div>
+  <div class="entries col-md-10" ng-if="!acompanho.currentFeed">
+    <h2>Últimas não lidas</h2>
+    <div ng-include="'partials/entries.html'"></div>
+    <div ng-hide="entries.length">
+      Você já leu tudo por aqui!
+    </div>
+  </div>
 </div>

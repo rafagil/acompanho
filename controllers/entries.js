@@ -3,8 +3,8 @@ module.exports = function(app) {
 	var cont = {};
 	var Feed = app.models.Feed;
 	var Entry = app.models.Entry;
-
 	var FeedUtil = app.utils.FeedUtil;
+	var q = require('q');
 
 	var handleError = function(res, e, feed) {
 		if (!res.headersSent) {
@@ -24,20 +24,19 @@ module.exports = function(app) {
 		res.json({});
 	};
 
-	cont.find = function(req, res) {
-		var feedId = req.params.feedId;
-		var page = req.query.page;
-		var pageSize = req.query.pageSize;
-
-		var promise = Entry.find({'feed': feedId})
+	var findEntries = function(filter, page, pageSize) {
+		var deferrer = q.defer();
+		var promise = Entry.find(filter)
 			.select("_id title link	unread starred pubDate image summary feed")
 			.sort({'pubDate':'desc'});
 
 		if (!page || !pageSize) {
 			promise.exec().then(function(entries) {
-				res.json({
-					'entries': entries,
-					'total': entries.length
+				Feed.populate(entries, {path: 'feed'}).then(function(populatedEntries) {
+					deferrer.resolve({
+						'entries': populatedEntries,
+						'total': entries.length
+					});
 				});
 			});
 		} else {
@@ -46,15 +45,40 @@ module.exports = function(app) {
 				.limit(pageSize)
 				.exec().then(function(entries) {
 
-				//Count all Entries
-				Entry.count({feed: feedId}).exec().then(function(count) {
-					res.json({
-						'entries': entries,
-						'total': count
+					Feed.populate(entries, {path: 'feed'}).then(function(populatedEntries) {
+						//Count all Entries
+						Entry.count(filter).exec().then(function(count) {
+							deferrer.resolve({
+								'entries': populatedEntries,
+								'total': count
+							});
+						});
 					});
 				});
-			});
 		}
+		return deferrer.promise;
+	};
+
+	cont.findByFeed = function(req, res) {
+		var feedId = req.params.feedId;
+		var page = req.query.page;
+		var pageSize = req.query.pageSize;
+
+		findEntries({'feed': feedId}, page, pageSize).then(function(entries) {
+			res.json(entries);
+		});
+	};
+
+	cont.list = function(req, res) {
+		var page = req.query.page;
+		var pageSize = req.query.pageSize;
+		var filter = {};
+		if (req.query.unread) {
+			filter.unread = true;
+		}
+		findEntries(filter, page, pageSize).then(function(entries) {
+			res.json(entries);
+		});
 	};
 
 	cont.read = function(req, res) {

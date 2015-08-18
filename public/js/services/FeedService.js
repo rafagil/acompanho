@@ -7,6 +7,10 @@ angular.module('Acompanho').factory('FeedService', function(Restangular) {
     return Restangular.one('feeds', feedId).one('entries').get({page: currentPage, pageSize: pageSize});
   };
 
+  service.allUnreadEntries = function(currentPage, pageSize) {
+    return Restangular.one('entries').get({page: currentPage, pageSize: pageSize, unread: true});
+  };
+
   service.getFeedById = function(id) {
     return Restangular.one('feeds', id).get();
   };

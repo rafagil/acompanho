@@ -17,7 +17,7 @@
 		</div>
 		<div class="panel-footer">
 			<i class="glyphicon glyphicon-star"></i>
-			{{entry.pubDate | date:'dd/MM/yyyy hh:mm'}}
+			{{entry.pubDate | date:'dd/MM/yyyy hh:mm'}} - Por {{entry.feed.title}}
 		</div>
 	</div>
 	<pagination total-items="totalEntries" ng-model="currentPage" ng-change="pageChanged(currentPage)" max-size="5" items-per-page="pageSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-show="entries">

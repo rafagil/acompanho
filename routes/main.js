@@ -44,9 +44,10 @@ module.exports = function(app) {
   app.get('/api/feeds/:id/unread_count', checkAuth, controllers.feeds.unreadCount);
 
   //Entries:
-  app.get('/api/feeds/:feedId/entries', checkAuth, controllers.entries.find);
+  app.get('/api/feeds/:feedId/entries', checkAuth, controllers.entries.findByFeed);
   app.get('/api/feeds/:feedId/entries/update', checkAuth, controllers.entries.update);
   app.get('/api/entries/:entryId', checkAuth, controllers.entries.read);
+  app.get('/api/entries', checkAuth, controllers.entries.list);
 
   //All (Html 5 mode on angular)
   app.get('/*', function(req, res) {
