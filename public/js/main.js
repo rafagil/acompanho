@@ -6,6 +6,7 @@ angular.module('Acompanho', [
   'ngAside',
   'ui.router',
   'restangular',
+  'AcompanhoServices',
 ]).config(function($httpProvider, $stateProvider, $locationProvider, $urlRouterProvider, RestangularProvider) {
 
   'use strict';

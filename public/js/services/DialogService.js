@@ -1,4 +1,4 @@
-angular.module('Acompanho').factory('DialogService', function($modal) {
+angular.module('AcompanhoServices').factory('DialogService', function($modal) {
   'use strict';
   var service = {};
 

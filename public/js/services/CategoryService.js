@@ -1,4 +1,4 @@
-angular.module('Acompanho').factory('CategoryService', function(Restangular) {
+angular.module('AcompanhoServices').factory('CategoryService', function(Restangular) {
   'use strict';
   var service = {};
 

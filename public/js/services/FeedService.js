@@ -1,4 +1,4 @@
-angular.module('Acompanho').factory('FeedService', function(Restangular) {
+angular.module('AcompanhoServices').factory('FeedService', function(Restangular) {
   'use strict';
 
   var service = {};
