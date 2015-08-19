@@ -10,8 +10,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.4",
     "bootstrap": "~3.3.4",
+    "angular": "~1.4.4",
     "angular-animate": "~1.4.4",
     "angular-sanitize": "~1.4.4",
     "angular-touch": "~1.4.4",
@@ -24,5 +24,6 @@
   "resolutions": {
     "angular": "1.4.4",
     "angular-bootstrap": "~0.13.3"
-  }
+  },
+  "main": ["./dist/services.js", "./dist/acompanho.js"]
 }

@@ -42,32 +42,36 @@
 	</div>
 	<ui-view></ui-view>
 
-	<script src="vendor/jquery/dist/jquery.min.js"></script>
-
+	<!-- vendor:js -->
+	<script src="vendor/jquery/dist/jquery.js"></script>
 	<script src="vendor/angular/angular.js"></script>
-	<script src="vendor/lodash/lodash.js"></script>
-	<script src="vendor/restangular/dist/restangular.js"></script>
-	<script src="vendor/angular-touch/angular-touch.js"></script>
 	<script src="vendor/angular-animate/angular-animate.js"></script>
-	<script src="vendor/ui-router/release/angular-ui-router.js"></script>
 	<script src="vendor/angular-sanitize/angular-sanitize.js"></script>
+	<script src="vendor/angular-touch/angular-touch.js"></script>
 	<script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="vendor/ui-router/release/angular-ui-router.js"></script>
 	<script src="vendor/angular-aside/dist/js/angular-aside.js"></script>
-
-	<script src="js/main.js"></script>
+	<script src="vendor/lodash/lodash.js"></script>
+	<script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="vendor/restangular/dist/restangular.js"></script>
+	<!-- endinject -->
+	<!-- inject:js -->
 	<script src="js/services/services.js"></script>
-	<script src="js/services/ResponseStatusInterceptorService.js"></script>
-	<script src="js/services/DialogService.js"></script>
-	<script src="js/services/FeedService.js"></script>
-	<script src="js/services/UserService.js"></script>
 	<script src="js/services/CategoryService.js"></script>
-	<script src="js/filters/limit-wordwise.filter.js"></script>
-
+	<script src="js/services/DialogService.js"></script>
+	<script src="js/services/EntryService.js"></script>
+	<script src="js/services/FeedService.js"></script>
+	<script src="js/services/ResponseStatusInterceptorService.js"></script>
+	<script src="js/services/UserService.js"></script>
+	<script src="js/main.js"></script>
 	<script src="js/controllers/AcompanhoController.js"></script>
-	<script src="js/controllers/EntriesController.js"></script>
-	<script src="js/controllers/NewFeedController.js"></script>
-	<script src="js/controllers/FeedDetailController.js"></script>
 	<script src="js/controllers/ConfirmDialogController.js"></script>
+	<script src="js/controllers/EntriesController.js"></script>
+	<script src="js/controllers/FeedDetailController.js"></script>
+	<script src="js/controllers/NewFeedController.js"></script>
+	<script src="js/filters/limit-wordwise.filter.js"></script>
+	<!-- endinject -->
+
 </body>
 
 </html>
