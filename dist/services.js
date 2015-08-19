@@ -37,6 +37,20 @@ angular.module('AcompanhoServices').factory('DialogService', function($modal) {
   return service;
 });
 
+angular.module('AcompanhoServices').factory('EntryService', function(Restangular) {
+  'use strict';
+
+  var service = {};
+
+  service.find = function(entryId, read) {
+    return Restangular.one('entries', entryId).get({
+      read: read
+    });
+  };
+
+  return service;
+});
+
 angular.module('AcompanhoServices').factory('FeedService', function(Restangular) {
   'use strict';
 
@@ -85,7 +99,7 @@ angular.module('AcompanhoServices').factory('FeedService', function(Restangular)
   };
 
   service.readEntry = function(entry) {
-    return Restangular.one('entries', entry._id).get().then(function(entry) {
+    return Restangular.one('entries', entry._id).one('read').get().then(function(entry) {
       return entry.description;
     });
   };
