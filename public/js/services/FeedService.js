@@ -31,18 +31,22 @@ angular.module('AcompanhoServices').factory('FeedService', function(Restangular)
     categories.forEach(function(cat) {
       cat.feeds.forEach(function(feed) {
         feed.updating = true;
-        Restangular.one('feeds', feed._id).one('entries').one('update').get().then(function(resp) {
+        service.refreshEntries(feed).then(function() {
           feed.updating = false;
-          if (resp.error) {
-            feed.failedUpdate = true;
-          } else {
-            feed.failedUpdate = false;
-            service.updateCount(feed);
-          }
         });
       });
     });
+  };
 
+  service.refreshEntries = function(feed) {
+    return Restangular.one('feeds', feed._id).one('entries').one('update').get().then(function(resp) {
+      if (resp.error) {
+        feed.failedUpdate = true;
+      } else {
+        feed.failedUpdate = false;
+        service.updateCount(feed);
+      }
+    });
   };
 
   service.readEntry = function(entry) {

@@ -82,7 +82,7 @@ module.exports = function(app) {
 	};
 
 	cont.read = function(req, res) {
-		var entryId = req.params.entryId;
+		var entryId = req.params.id;
 
 		Entry.findOne({'_id': entryId})
 			.select("description")
