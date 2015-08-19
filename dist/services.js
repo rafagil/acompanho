@@ -51,7 +51,7 @@ angular.module('AcompanhoServices').factory('EntryService', function(Restangular
   return service;
 });
 
-angular.module('AcompanhoServices').factory('FeedService', function(Restangular) {
+angular.module('AcompanhoServices').factory('FeedService', function(Restangular, $q) {
   'use strict';
 
   var service = {};
@@ -81,14 +81,22 @@ angular.module('AcompanhoServices').factory('FeedService', function(Restangular)
   };
 
   service.updateAll = function(categories) {
+    var deferrer = $q.defer();
+    var promises = [];
     categories.forEach(function(cat) {
       cat.feeds.forEach(function(feed) {
         feed.updating = true;
-        service.refreshEntries(feed).then(function() {
+        promises.push(service.refreshEntries(feed).then(function() {
           feed.updating = false;
-        });
+        }));
       });
     });
+
+    $q.all(promises).then(function() {
+      deferrer.resolve();
+    });
+
+    return deferrer.promise;
   };
 
   service.refreshEntries = function(feed) {
