@@ -95,6 +95,23 @@ module.exports = function(app) {
 		});
 	};
 
+	cont.find = function(req, res) {
+		var entryId = req.params.id;
+		var markAsRead = req.query.read;
+
+		Entry.findOne({'_id': entryId})
+		.select("_id title link	unread starred pubDate description")
+		.exec().then(function(entry) {
+
+			if (markAsRead) {
+				//Mark as Read, no need to be "synchronous":
+				Entry.update({'_id' : entry._id}, {'unread': false}).exec();
+			}
+
+			res.json(entry);
+		});
+	};
+
 	cont.update = function(req, res) {
 		var feedId = req.params.feedId;
 

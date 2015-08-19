@@ -46,7 +46,7 @@ angular.module('AcompanhoServices').factory('FeedService', function(Restangular)
   };
 
   service.readEntry = function(entry) {
-    return Restangular.one('entries', entry._id).get().then(function(entry) {
+    return Restangular.one('entries', entry._id).one('read').get().then(function(entry) {
       return entry.description;
     });
   };
