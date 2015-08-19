@@ -1,24 +1,21 @@
 <span ng-hide="entries">
 	<img src="img/ring.svg" style="width:60px" />
 </span>
-<accordion close-others="true">
-
-	<div class="panel panel-default" ng-repeat="entry in entries">
-		<div class="panel-heading pointer" ng-click="openEntry(entry)">
-			<h3 class="panel-title" ng-class="{'unread': entry.unread}">{{entry.title | limitWordWise:110}}</h3>
+<div class="panel panel-default" ng-repeat="entry in entries">
+	<div class="panel-heading pointer" ng-click="openEntry(entry)">
+		<h3 class="panel-title" ng-class="{'unread': entry.unread}">{{entry.title | limitWordWise:110}}</h3>
+	</div>
+	<div class="panel-body">
+		<div class="col-sm-2 no-padding-right" ng-if="entry.image">
+			<img src="{{entry.image}}" style="width:100%; cursor:pointer" ng-click="openEntry(entry)" />
 		</div>
-		<div class="panel-body">
-			<div class="col-sm-2 no-padding-right" ng-if="entry.image">
-				<img src="{{entry.image}}" style="width:100%; cursor:pointer" ng-click="openEntry(entry)" />
-			</div>
-			<div ng-class="{'col-sm-10': entry.image, 'col-sm-11': !entry.image}">
-				<p ng-bind-html="entry.summary" class="pointer" ng-click="openEntry(entry)"></p>
-			</div>
-		</div>
-		<div class="panel-footer">
-			<i class="glyphicon glyphicon-star"></i>
-			{{entry.pubDate | date:'dd/MM/yyyy hh:mm'}} - Por {{entry.feed.title}}
+		<div ng-class="{'col-sm-10': entry.image, 'col-sm-11': !entry.image}">
+			<p ng-bind-html="entry.summary" class="pointer" ng-click="openEntry(entry)"></p>
 		</div>
 	</div>
-	<pagination total-items="totalEntries" ng-model="currentPage" ng-change="pageChanged(currentPage)" max-size="5" items-per-page="pageSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-show="entries">
-	</pagination>
+	<div class="panel-footer">
+		<i class="glyphicon glyphicon-star"></i> {{entry.pubDate | date:'dd/MM/yyyy hh:mm'}} - Por {{entry.feed.title}}
+	</div>
+</div>
+<pagination total-items="totalEntries" ng-model="currentPage" ng-change="pageChanged(currentPage)" max-size="5" items-per-page="pageSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" ng-show="entries">
+</pagination>

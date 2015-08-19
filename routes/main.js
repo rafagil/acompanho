@@ -2,6 +2,13 @@ module.exports = function(app) {
 
   'use strict';
 
+  //Enable CORS (use with caution):
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
   var checkAuth = function(req, res, next) {
     //Uncomment this to enable OAuth2
 
@@ -51,7 +58,9 @@ module.exports = function(app) {
 
   //All (Html 5 mode on angular)
   app.get('/*', function(req, res) {
-		res.sendFile('index.html', {root: __dirname + '/../public/'});
+    res.sendFile('index.html', {
+      root: __dirname + '/../public/'
+    });
   });
 
 };

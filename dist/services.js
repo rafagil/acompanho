@@ -1,3 +1,5 @@
+angular.module('AcompanhoServices', []);
+
 angular.module('AcompanhoServices').factory('CategoryService', function(Restangular) {
   'use strict';
   var service = {};
@@ -118,8 +120,6 @@ angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', 
 
   return interceptor;
 });
-
-angular.module('AcompanhoServices', []);
 
 angular.module('AcompanhoServices').factory('UserService', function(Restangular) {
   'use strict';

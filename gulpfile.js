@@ -5,26 +5,35 @@
   var uglify = require('gulp-uglify');
   var concat = require('gulp-concat');
   var rename = require('gulp-rename');
+  var nodemon = require('gulp-nodemon');
 
-  var serviceFiles = './public/js/services/*.js';
+  var paths = {
+    servicesModule: './public/js/services/services.js',
+    serviceFiles: './public/js/services/!(services)*.js'
+  };
 
   gulp.task('dist', function() {
-    gulp.src(serviceFiles)
+    gulp.src([paths.servicesModule, paths.serviceFiles])
       .pipe(concat('./services'))
       .pipe(rename('services.js'))
       .pipe(gulp.dest('./dist'));
 
-      gulp.src(serviceFiles)
+      gulp.src([paths.servicesModule, paths.serviceFiles])
         .pipe(concat('./services'))
         .pipe(rename('services.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./dist'));
   });
-  gulp.task('default', function() {
-    gulp.run('dist');
-    // gulp.watch(serviceFiles, function() {
-    //   gulp.run('dist');
-    // });
+
+  gulp.task('serve', function() {
+    nodemon({
+      script: 'app.js',
+      ext: 'js'
+    }).on('restart', function() {
+      console.log('Restarted.');
+    });
   });
+
+  gulp.task('default', ['dist']);
 
 }());

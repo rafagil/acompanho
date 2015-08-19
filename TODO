@@ -29,6 +29,8 @@ backlog:
 Melhorias internas:
 OK Utilizar o Restangular e transformar tudo em REST
   Gravar a imagem do post redimensionada no banco (usar base64).
+	Criar um gulpfile para injetar automaticamente os js
+	criar um build somente com os services concatenados em um único arquivo pra ser importado no app (ver como comitar isso no github)
 
 Bugs:
 	Clicar no feed já selecionado não está atualizando as entries
