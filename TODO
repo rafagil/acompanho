@@ -47,6 +47,9 @@ OK Criar visualização com todos os feeds (infinite scroll?) com ícone do feed
 		Ao autenticar o usuário, gerar um token para enviar para o cliente. Este token será salvo na sessão e no banco.
 		No cliente, salvar o token como permStorage (ou cookie permanente);
 		Configurar o Restangular para mandar esse token em todas as requisições.
+		Fazer um novo app no github para autenticar o app mobile
+		Nessa nova URL de retorno para o app, chamar um custom url schema para abrir o app no iOS e no Android passando o token de autenticação
+
 		Se a requisição vier sem token:
 			Verifica se está logado no passport.
 				Se sim: gera um novo token, atualiza o banco e a sessão e devolve o novo token para o client.

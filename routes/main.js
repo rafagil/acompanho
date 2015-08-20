@@ -5,26 +5,35 @@ module.exports = function(app) {
   //Enable CORS (use with caution):
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, token");
     next();
   });
 
   var checkAuth = function(req, res, next) {
     //Uncomment this to enable OAuth2
-
-    /*if (req.isAuthenticated()) {
+    if (req.isAuthenticated() || req.session.user) {
     	req.user = req.session.user;
     	return next();
+    } else {
+      var token = req.get('token');
+      //Fake login, disable in production:
+      if (token === 'acompanhoApp') {
+        var User = app.models.User;
+        User.findOne({'login': 'rafagil'}).exec().then(function(user) {
+          req.user = user;
+          next();
+    		});
+      } else {
+        res.status('401').json('Não autorizado');
+      }
     }
-    res.status('401').json('Não autorizado');
-    */
 
     //Fake login (uncomment this to disable authentication - Development purpouses only):
-    req.user = {
-      _id: '55689996182493d0243918fb',
-      login: 'rafagil'
-    };
-    return next();
+    // req.user = {
+    //   _id: '55689996182493d0243918fb',
+    //   login: 'rafagil'
+    // };
+    // return next();
     //Fake login end
   };
 
@@ -57,7 +66,7 @@ module.exports = function(app) {
   app.get('/api/entries/:id', checkAuth, controllers.entries.find);
   app.get('/api/entries/:id/read', checkAuth, controllers.entries.read);
 
-  //All (Html 5 mode on angular)
+  //All (Html 5 mode on angular):
   app.get('/*', function(req, res) {
     res.sendFile('index.html', {
       root: __dirname + '/../public/'
