@@ -16,6 +16,8 @@
     "express-load": "^1.1.14",
     "express-session": "^1.11.2",
     "feedparser": "^1.1.0",
+    "file-type": "^2.10.2",
+    "jimp": "^0.2.4",
     "mongoose": "3.8",
     "passport": "^0.2.2",
     "passport-github": "^0.1.5",

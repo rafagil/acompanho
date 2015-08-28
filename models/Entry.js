@@ -10,6 +10,7 @@ module.exports = function() {
 		starred     : {type : Boolean},
 		pubDate     : {type : Date},
 		image       : {type : String},
+		imageBase64 : {type : String},
 		summary     : {type : String},
 		feed        : {type: ObjectId, ref: 'Feed'}
 	});
