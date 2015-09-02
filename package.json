@@ -2,7 +2,7 @@
   "name": "Acompanho",
   "version": "2.0.0",
   "description": "Simple RSS Reader",
-  "main": "app.js",
+  "main": "cluster.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

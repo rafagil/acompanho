@@ -63,7 +63,7 @@
 
   gulp.task('serve', ['inject-dev'], function() {
     nodemon({
-      script: 'app.js',
+      script: 'server.js',
       ignore: ['public/*'],
       ext: 'js'
     });
