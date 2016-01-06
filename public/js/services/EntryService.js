@@ -1,4 +1,4 @@
-angular.module('AcompanhoServices').factory('EntryService', function(Restangular) {
+angular.module('AcompanhoServices').factory('EntryService', ['Restangular', function(Restangular) {
   'use strict';
 
   var service = {};
@@ -10,4 +10,4 @@ angular.module('AcompanhoServices').factory('EntryService', function(Restangular
   };
 
   return service;
-});
+}]);

@@ -30,6 +30,7 @@
         <h3 class="panel-title">Meus Feeds</h3>
       </div>
       <div class="panel-body">
+        <label><a ui-sref="feeds.unread">Últimas não lidas</a></label>
         <div ng-repeat="cat in categories">
           <label>{{cat.name}}</label>
           <ul class="feedList list-group">
@@ -48,13 +49,6 @@
     </div>
   </div>
 
-  <div class="entries col-md-10" ui-view ng-show="acompanho.currentFeed">
-  </div>
-  <div class="entries col-md-10" ng-if="!acompanho.currentFeed">
-    <h2>Últimas não lidas</h2>
-    <div ng-include="'partials/entries.html'"></div>
-    <div ng-hide="entries.length">
-      Você já leu tudo por aqui!
-    </div>
+  <div class="entries col-md-10" ui-view>
   </div>
 </div>

@@ -1,4 +1,4 @@
-angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', function($q) {
+angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', ['$q', function($q) {
   'use strict';
   var interceptor = {};
 
@@ -18,4 +18,4 @@ angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', 
   };
 
   return interceptor;
-});
+}]);

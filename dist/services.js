@@ -1,6 +1,6 @@
 angular.module('AcompanhoServices', []);
 
-angular.module('AcompanhoServices').factory('CategoryService', function(Restangular) {
+angular.module('AcompanhoServices').factory('CategoryService', ['Restangular', function(Restangular) {
   'use strict';
   var service = {};
 
@@ -17,9 +17,9 @@ angular.module('AcompanhoServices').factory('CategoryService', function(Restangu
   };
 
   return service;
-});
+}]);
 
-angular.module('AcompanhoServices').factory('DialogService', function($modal) {
+angular.module('AcompanhoServices').factory('DialogService', ['$modal', function($modal) {
   'use strict';
   var service = {};
 
@@ -35,9 +35,9 @@ angular.module('AcompanhoServices').factory('DialogService', function($modal) {
   };
 
   return service;
-});
+}]);
 
-angular.module('AcompanhoServices').factory('EntryService', function(Restangular) {
+angular.module('AcompanhoServices').factory('EntryService', ['Restangular', function(Restangular) {
   'use strict';
 
   var service = {};
@@ -49,9 +49,9 @@ angular.module('AcompanhoServices').factory('EntryService', function(Restangular
   };
 
   return service;
-});
+}]);
 
-angular.module('AcompanhoServices').factory('FeedService', function(Restangular, $q) {
+angular.module('AcompanhoServices').factory('FeedService', ['Restangular', '$q', function(Restangular, $q) {
   'use strict';
 
   var service = {};
@@ -123,9 +123,9 @@ angular.module('AcompanhoServices').factory('FeedService', function(Restangular,
   };
 
   return service;
-});
+}]);
 
-angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', function($q) {
+angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', ['$q', function($q) {
   'use strict';
   var interceptor = {};
 
@@ -145,9 +145,9 @@ angular.module('AcompanhoServices').factory('ResponseStatusInterceptorService', 
   };
 
   return interceptor;
-});
+}]);
 
-angular.module('AcompanhoServices').factory('UserService', function(Restangular) {
+angular.module('AcompanhoServices').factory('UserService', ['Restangular', function(Restangular) {
   'use strict';
 
   var service = {};
@@ -157,4 +157,4 @@ angular.module('AcompanhoServices').factory('UserService', function(Restangular)
   };
 
   return service;
-});
+}]);

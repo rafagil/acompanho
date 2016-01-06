@@ -31,6 +31,7 @@ OK Utilizar o Restangular e transformar tudo em REST
   Gravar a imagem do post redimensionada no banco (usar base64).
 	Criar um gulpfile para injetar automaticamente os js
 	criar um build somente com os services concatenados em um único arquivo pra ser importado no app (ver como comitar isso no github)
+	Mudar o DialogService para promise;
 
 Bugs:
 	Clicar no feed já selecionado não está atualizando as entries
@@ -40,6 +41,8 @@ Novas funcionalidades e design:
 OK Pegar  a primeira imagem do feed (enclosure ou primeiro img) e mostrar a miniatura na listagem
 OK Alterar o layout para mostrar um pouco do feed e ao clicar abre um sidepanel com o conteúdo do feed
 OK Criar visualização com todos os feeds (infinite scroll?) com ícone do feed no topo de cada post
+   Adicionar busca
+	 Criar botão para marcar todos como lido (na página atual e todas as páginas)
 	Fazer a leitura do feed mudar o state, para que o back funcione. Colocar um botão para voltar no mobile
 	Melhorar a forma de criar novas categorias
 	Melhorar o login:

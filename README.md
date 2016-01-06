@@ -3,11 +3,22 @@ Acompanho (reads "Acompaño") is a simple RSS Reader made with the MEAN Stack (M
 Any suggestions are welcome!
 
 # Install Instructions
-Execute:
+You will need node.js, bower and gulp to build/run the app.
+Download node.js from http://www.nodejs.org
+
+and install the other tools using the bundled npm:
+npm install bower gulp
+
+Then, execute (in the app folder):
 
 npm install
+
 bower install
 
-then, start the app using:
+Then, start the app using:
 
-node app.js
+gulp serve
+
+# Configuring database
+Acompanho needs a mongodb database, and its configuration is "hardcoded" on the app.js file.
+Future releases will have a better solution for that.
