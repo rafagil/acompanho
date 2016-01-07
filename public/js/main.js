@@ -48,9 +48,9 @@ angular.module('Acompanho', [
     $httpProvider.interceptors.push('ResponseStatusInterceptorService');
 
     RestangularProvider.setBaseUrl('/api');
-    RestangularProvider.setDefaultHeaders({
-      token: 'tokenHere'
-    });
+    // RestangularProvider.setDefaultHeaders({
+    //   token: 'tokenHere'
+    // });
     RestangularProvider.setRestangularFields({
       id: "_id"
     });

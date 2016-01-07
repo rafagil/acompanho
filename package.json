@@ -2,7 +2,7 @@
   "name": "Acompanho",
   "version": "2.0.0",
   "description": "Simple RSS Reader",
-  "main": "cluster.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,6 +33,7 @@
     "gulp-nodemon": "^2.0.3",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.2.0",
-    "main-bower-files": "^2.9.0"
+    "main-bower-files": "^2.9.0",
+    "bower": "1.5.2"
   }
 }

@@ -2,10 +2,38 @@ angular.module('Acompanho').controller('EntriesController', [
   '$scope',
   '$stateParams',
   '$sce',
+  '$aside',
   'FeedService',
-  function($scope, $stateParams, $sce, FeedService) {
+  function($scope, $stateParams, $sce, $aside, FeedService) {
     'use strict';
     $scope.pageSize = 10;
+
+    var showAside = function(entry) {
+      $aside.open({
+        placement: 'right',
+        controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
+          $scope.entry = entry;
+          $scope.close = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        }],
+        templateUrl: 'partials/entry.html',
+        size: 'lg'
+      });
+    };
+
+    $scope.openEntry = function(entry) {
+      if (!entry.description) {
+        entry.loading = true;
+        FeedService.readEntry(entry).then(function(description) {
+          entry.loading = false;
+          entry.description = description;
+          entry.unread = false;
+          $scope.acompanho.currentFeed.unreadCount--;
+        });
+      }
+      showAside(entry);
+    };
 
     $scope.pageChanged = function(newPage) {
 

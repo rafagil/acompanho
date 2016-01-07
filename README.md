@@ -7,17 +7,21 @@ You will need node.js, bower and gulp to build/run the app.
 Download node.js from http://www.nodejs.org
 
 and install the other tools using the bundled npm:
-npm install bower gulp
+
+```shell
+$ npm install bower gulp
+```
 
 Then, execute (in the app folder):
-
-npm install
-
-bower install
+```shell
+$ npm install
+$ bower install
+```
 
 Then, start the app using:
-
-gulp serve
+```shell
+$ gulp serve
+```
 
 # Configuring database
 Acompanho needs a mongodb database, and its configuration is "hardcoded" on the app.js file.

@@ -1,10 +1,38 @@
 angular.module('Acompanho').controller('UnreadEntriesController', [
   '$scope',
+  '$aside',
   'FeedService',
-  function($scope, FeedService) {
+  function($scope, $aside, FeedService) {
     'use strict';
 
     $scope.pageSize = 10;
+
+    var showAside = function(entry) {
+      $aside.open({
+        placement: 'right',
+        controller: ['$scope', '$modalInstance', function($scope, $modalInstance) {
+          $scope.entry = entry;
+          $scope.close = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        }],
+        templateUrl: 'partials/entry.html',
+        size: 'lg'
+      });
+    };
+
+    $scope.openEntry = function(entry) {
+      if (!entry.description) {
+        entry.loading = true;
+        FeedService.readEntry(entry).then(function(description) {
+          entry.loading = false;
+          entry.description = description;
+          entry.unread = false;
+          $scope.pageChanged(1);
+        });
+      }
+      showAside(entry);
+    };
 
     $scope.pageChanged = function(pageNumber) {
       FeedService.allUnreadEntries(pageNumber, $scope.pageSize).then(function(entries) {
