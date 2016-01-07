@@ -4,12 +4,11 @@ Any suggestions are welcome!
 
 # Install Instructions
 You will need node.js, bower and gulp to build/run the app.
-Download node.js from http://www.nodejs.org
 
-and install the other tools using the bundled npm:
+Download node.js from http://www.nodejs.org and install the other tools using the bundled npm:
 
 ```shell
-$ npm install bower gulp
+$ npm install -g bower gulp
 ```
 
 Then, execute (in the app folder):
