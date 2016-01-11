@@ -1,8 +1,8 @@
 module.exports = function(app) {
 	'use strict';
 	var cont = {};
-	var Feed = app.models.Feed;
-	var Entry = app.models.Entry;
+	var FeedRepository = app.repositories.feed;
+	var EntryRepository = app.repositories.entry;
 	var FeedUtil = app.utils.FeedUtil;
 
 	var handleError = function(res, e) {
@@ -14,13 +14,13 @@ module.exports = function(app) {
 	};
 
 	cont.list = function(req, res) {
-		Feed.find({user:req.user._id}).sort({'title':'asc'}).exec().then(function(feeds) {
+		FeedRepository.list(req.user._id).then(function (feeds) {
 			res.json(feeds);
 		});
 	};
 
 	cont.find = function(req, res) {
-		Feed.where({user:req.user._id, _id: req.params.id}).findOne().exec().then(function(feed) {
+		FeedRepository.find(req.user._id, req.params.id).then(function(feed) {
 			res.json(feed);
 		});
 	};
@@ -30,7 +30,7 @@ module.exports = function(app) {
 		FeedUtil.parseFeedMeta(feedParam.url, function(newFeed) {
 			newFeed.user = req.user._id;
 			newFeed.category = feedParam.category;
-			Feed.create(newFeed).then(function() {
+			FeedRepository.save(newFeed).then(function() {
 				res.json({});
 			});
 		}, function(err) {
@@ -40,35 +40,24 @@ module.exports = function(app) {
 
 	cont.update = function(req, res) {
 		var feed = req.body;
-		Feed.update({'_id' : feed._id}, {
-			title : feed.title,
-			description : feed.description,
-			link : feed.link,
-			url : feed.url,
-			category: feed.category
-		}).exec().then(function(feed) {
+		FeedRepository.save(feed).then(function(feed) {
 			res.json(feed);
 		});
 	};
 
 	cont.delete = function(req, res) {
 		var feedId = req.params.id;
-		Entry.remove({'feed': feedId}).exec().then(function() {
-			Feed.remove({'_id' : feedId}).exec().then(function(){
+    EntryRepository.removeByFeed(feedId).then(function() {
+			FeedRepository.remove(feedId).then(function(){
 				res.json({});
 			});
 		});
 	};
 
 	cont.unreadCount = function(req, res) {
-		var feedId = req.params.id;
-		Entry.count({feed: feedId, unread: true}, function(err, count) {
-			if (err) {
-				handleError(err);
-			} else {
-				res.json(count);
-			}
-		});
+    EntryRepository.unreadCount(req.params.id).then(function(count) {
+      res.json(count);
+    });
 	};
 
 	return cont;

@@ -62,3 +62,11 @@ OK Criar visualização com todos os feeds (infinite scroll?) com ícone do feed
 				Se sim: 200
 				Se não: verifica se o token é válido no banco.
 					Se sim: Ou retornar um status diferente de 200 para gerar um novo token, ou simplesmente adiciona o token dele na sessão
+					
+					
+  Criar um banco de dados de feeds por categoria que os usuários colocam.
+	Deve ter tipo um "Popular categories", e os feeds que as pessoas comumente adicionam nessas categorias.
+	Mudar a tela (criar) de adicionar feed para exibir as categorias populares, fazer busca por nome do feed e adicionar por URL (que já tageia o feed de acordo)
+	Fazer múltiplos usuários terem o mesmo feed, para evitar crescimento desnecessário no banco
+
+  Guardar as tags "category" das entries (se tiverem) para ajudar na busca (são como tags)
