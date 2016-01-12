@@ -25,12 +25,12 @@ angular.module('Acompanho').controller('FeedDetailController', [
 
     $scope.delete = function() {
       var message = "Deseja realmente excluir o feed " + $scope.editFeed.title + "?";
-      DialogService.showConfirmDialog(message, function() {
-        FeedService.deleteFeed($scope.editFeed).then(function() {
-          $scope.acompanho.currentFeed = null;
-          $state.go('feeds');
-          $scope.updateFeedList();
-        });
+      DialogService.showConfirmDialog(message).then(function() {
+        return FeedService.deleteFeed($scope.editFeed);
+      }).then(function() {
+        $scope.acompanho.currentFeed = null;
+        $state.go('feeds');
+        $scope.updateFeedList();
       });
     };
 

@@ -31,7 +31,7 @@ OK Utilizar o Restangular e transformar tudo em REST
   Gravar a imagem do post redimensionada no banco (usar base64).
 	Criar um gulpfile para injetar automaticamente os js
 	criar um build somente com os services concatenados em um único arquivo pra ser importado no app (ver como comitar isso no github)
-	Mudar o DialogService para promise;
+OK Mudar o DialogService para promise;
 
 Bugs:
 	Clicar no feed já selecionado não está atualizando as entries
@@ -62,8 +62,8 @@ OK Criar visualização com todos os feeds (infinite scroll?) com ícone do feed
 				Se sim: 200
 				Se não: verifica se o token é válido no banco.
 					Se sim: Ou retornar um status diferente de 200 para gerar um novo token, ou simplesmente adiciona o token dele na sessão
-					
-					
+
+
   Criar um banco de dados de feeds por categoria que os usuários colocam.
 	Deve ter tipo um "Popular categories", e os feeds que as pessoas comumente adicionam nessas categorias.
 	Mudar a tela (criar) de adicionar feed para exibir as categorias populares, fazer busca por nome do feed e adicionar por URL (que já tageia o feed de acordo)

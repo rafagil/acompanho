@@ -19,11 +19,12 @@ angular.module('AcompanhoServices').factory('CategoryService', ['Restangular', f
   return service;
 }]);
 
-angular.module('AcompanhoServices').factory('DialogService', ['$modal', function($modal) {
+angular.module('AcompanhoServices').factory('DialogService', ['$modal', '$q', function($modal, $q) {
   'use strict';
   var service = {};
 
-  service.showConfirmDialog = function(message, onOK) {
+  service.showConfirmDialog = function(message) {
+    var d = $q.defer();
     this.confirmMessage = message;
     var modalInstance = $modal.open({
       templateUrl: 'partials/confirm_dialog.html',
@@ -31,7 +32,11 @@ angular.module('AcompanhoServices').factory('DialogService', ['$modal', function
       animation: true
     });
 
-    modalInstance.result.then(onOK);
+    modalInstance.result.then(function() {
+      d.resolve();
+    });
+
+    return d.promise;
   };
 
   return service;

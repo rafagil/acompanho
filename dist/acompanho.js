@@ -303,12 +303,12 @@ angular.module('Acompanho').controller('FeedDetailController', [
 
     $scope.delete = function() {
       var message = "Deseja realmente excluir o feed " + $scope.editFeed.title + "?";
-      DialogService.showConfirmDialog(message, function() {
-        FeedService.deleteFeed($scope.editFeed).then(function() {
-          $scope.acompanho.currentFeed = null;
-          $state.go('feeds');
-          $scope.updateFeedList();
-        });
+      DialogService.showConfirmDialog(message).then(function() {
+        return FeedService.deleteFeed($scope.editFeed);
+      }).then(function() {
+        $scope.acompanho.currentFeed = null;
+        $state.go('feeds');
+        $scope.updateFeedList();
       });
     };
 
@@ -428,19 +428,24 @@ angular.module('Acompanho').controller('UnreadEntriesController', [
 ]);
 
 angular.module('Acompanho').filter('limitWordWise', function() {
-
   'use strict';
 
   return function(value, max) {
-    if (!value) return '';
+    if (!value) {
+      return '';
+    }
 
     max = parseInt(max, 10);
-    if (!max) return value;
-    if (value.length <= max) return value;
+    if (!max) {
+      return value;
+    }
+    if (value.length <= max) {
+      return value;
+    }
 
     value = value.substr(0, max);
     var lastspace = value.lastIndexOf(' ');
-    if (lastspace != -1) {
+    if (lastspace !== -1) {
       value = value.substr(0, lastspace);
     }
 
